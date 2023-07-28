@@ -1,7 +1,11 @@
+# TODO: make this actually a class instead of just the player script that happens to be a class www
+# important for card collision n such
+class_name Player
 extends CharacterBody2D
 
 const SPEED := 300.0
 @export var power = 0
+@export var score = 0
 var lives = 1
 
 var can_shoot := true
@@ -16,9 +20,9 @@ var bullet := preload("res://scenes/gameplay/player_bullet.tscn")
 
 @onready var sfx_player := $SFXPlayer as AudioStreamPlayer2D
 @onready var s_shoot := preload("res://assets/sounds/2hu_p_shoot.wav") as AudioStream
+@onready var s_pickup := preload("res://assets/sounds/2hu_pickup.wav") as AudioStream
 
 @onready var timer := $Timer as Timer
-@onready var devtext := $Label as Label
 
 func _physics_process(delta) -> void:
 	movement()

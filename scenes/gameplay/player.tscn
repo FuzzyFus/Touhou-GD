@@ -112,7 +112,7 @@ region = Rect2(8, 249, 8, 8)
 atlas = ExtResource("4_cvlly")
 region = Rect2(126, 17, 16, 15)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_s4psi")
 shooting_delay = 0.1
 

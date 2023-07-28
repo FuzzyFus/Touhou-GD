@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhgccekvt1q3s"]
+
+[ext_resource type="Script" path="res://scenes/gameplay/card.gd" id="1_tbfnn"]
+[ext_resource type="Texture2D" uid="uid://bk0wfg8no5pkw" path="res://assets/sprites/PC Computer - Touhou Youyoumu Perfect Cherry Blossom - Projectiles & Objects.png" id="1_vlls8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep6ue"]
+atlas = ExtResource("1_vlls8")
+region = Rect2(24, 336, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qggmu"]
+
+[node name="Card" type="RigidBody2D"]
+gravity_scale = 0.1
+linear_velocity = Vector2(0, -100)
+script = ExtResource("1_tbfnn")
+current_type = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
+texture = SubResource("AtlasTexture_ep6ue")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qggmu")
+
+[connection signal="body_entered" from="Area2D" to="." method="on_collision"]

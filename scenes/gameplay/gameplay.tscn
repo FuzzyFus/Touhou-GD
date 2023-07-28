@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://boswif7tqqxag"]
+[gd_scene load_steps=8 format=3 uid="uid://boswif7tqqxag"]
 
 [ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
 [ext_resource type="Script" path="res://scenes/gameplay/projectile_barrier.gd" id="2_0wdu8"]
+[ext_resource type="PackedScene" uid="uid://bhgccekvt1q3s" path="res://scenes/gameplay/card.tscn" id="3_vkgvg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib3x4"]
 normal = Vector2(0, 1)
@@ -65,5 +66,9 @@ shape = SubResource("WorldBoundaryShape2D_ljf0b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
+
+[node name="card" parent="." instance=ExtResource("3_vkgvg")]
+position = Vector2(3, -45)
+current_type = 2
 
 [connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
