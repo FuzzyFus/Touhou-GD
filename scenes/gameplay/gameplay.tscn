@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://boswif7tqqxag"]
+
+[ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
+[ext_resource type="Script" path="res://scenes/gameplay/projectile_barrier.gd" id="2_0wdu8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib3x4"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x0o0l"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e386b"]
+normal = Vector2(1, 0)
+distance = -156.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ljf0b"]
+normal = Vector2(-1, 0)
+distance = -156.0
+
+[node name="Gameplay" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_i33lo")]
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="World" type="StaticBody2D" parent="Boundaries"]
+scale = Vector2(0.8, 0.8)
+
+[node name="Top" type="CollisionShape2D" parent="Boundaries/World"]
+position = Vector2(0, -324)
+shape = SubResource("WorldBoundaryShape2D_ib3x4")
+
+[node name="Bottom" type="CollisionShape2D" parent="Boundaries/World"]
+position = Vector2(0, 324)
+shape = SubResource("WorldBoundaryShape2D_x0o0l")
+
+[node name="Left" type="CollisionShape2D" parent="Boundaries/World"]
+position = Vector2(-150, 0)
+shape = SubResource("WorldBoundaryShape2D_e386b")
+
+[node name="Right" type="CollisionShape2D" parent="Boundaries/World"]
+position = Vector2(150, 0)
+shape = SubResource("WorldBoundaryShape2D_ljf0b")
+
+[node name="Projectiles" type="Area2D" parent="Boundaries"]
+scale = Vector2(1.2, 1.2)
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("2_0wdu8")
+
+[node name="Top" type="CollisionShape2D" parent="Boundaries/Projectiles"]
+position = Vector2(0, -324)
+shape = SubResource("WorldBoundaryShape2D_ib3x4")
+
+[node name="Bottom" type="CollisionShape2D" parent="Boundaries/Projectiles"]
+position = Vector2(0, 324)
+shape = SubResource("WorldBoundaryShape2D_x0o0l")
+
+[node name="Left" type="CollisionShape2D" parent="Boundaries/Projectiles"]
+position = Vector2(-150, 0)
+shape = SubResource("WorldBoundaryShape2D_e386b")
+
+[node name="Right" type="CollisionShape2D" parent="Boundaries/Projectiles"]
+position = Vector2(150, 0)
+shape = SubResource("WorldBoundaryShape2D_ljf0b")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.25, 1.25)
+
+[connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
