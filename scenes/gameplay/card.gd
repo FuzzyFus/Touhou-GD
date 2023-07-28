@@ -12,6 +12,12 @@ var float_target
 var players
 
 func _ready() -> void:
+	# makes sure that the atlas can be safely changed
+	var base_texture : AtlasTexture = sprite.texture
+	sprite.texture = AtlasTexture.new()
+	sprite.texture.atlas = base_texture.atlas
+	
+	# get players for float_to_player()
 	players = get_tree().get_nodes_in_group("player")
 	# makes sure it changes to the type requested
 	change_card_type(current_type)
@@ -45,6 +51,7 @@ func change_card_type(new_type: int):
 func on_collision(ev):
 	if ev.is_in_group("player"):
 		var player = ev as Player
+		var old_level : int = clamp(floor(player.power / 50), 0, 2)
 		
 		match current_type:
 			type.POWER:
@@ -65,6 +72,12 @@ func on_collision(ev):
 		
 		player.sfx_player.stream = player.s_pickup
 		player.sfx_player.play()
+		
+		# if leveled up...
+		if old_level < clamp(floor(player.power / 50), 0, 2):
+			# TODO: RAAAAAAHHHH IT CLIPS OTHER SOUNDS!!!!! PAIN!!!!! make instant disposing AudioStreamPlayer2D
+			player.sfx_player.stream = player.s_powerup
+			player.sfx_player.play()
 		
 		self.queue_free()
 

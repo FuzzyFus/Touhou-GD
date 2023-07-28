@@ -67,8 +67,21 @@ shape = SubResource("WorldBoundaryShape2D_ljf0b")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
 
-[node name="card" parent="." instance=ExtResource("3_vkgvg")]
-position = Vector2(3, -45)
+[node name="dev_cards" type="Node2D" parent="."]
+
+[node name="card4" parent="dev_cards" instance=ExtResource("3_vkgvg")]
+position = Vector2(202, -102)
+
+[node name="card3" parent="dev_cards" instance=ExtResource("3_vkgvg")]
+position = Vector2(166, -131)
 current_type = 2
+
+[node name="card2" parent="dev_cards" instance=ExtResource("3_vkgvg")]
+position = Vector2(167, -69)
+current_type = 1
+
+[node name="card" parent="dev_cards" instance=ExtResource("3_vkgvg")]
+position = Vector2(115, -76)
+current_type = 0
 
 [connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]

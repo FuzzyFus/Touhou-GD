@@ -3,25 +3,28 @@
 class_name Player
 extends CharacterBody2D
 
-const SPEED := 300.0
+# basic player vars
 @export var power = 0
 @export var score = 0
-var lives = 1
+@export var lives = 1
+const SPEED := 300.0
 
-var can_shoot := true
 @export var shooting_delay := 0.3
 var damage_delay := 3.0
+var can_shoot := true
 var slow := false
 
 # TODO: this is stupid. i should probably make a new script for this but im stubborn
 var ball_t := 0.0
 
-var bullet := preload("res://scenes/gameplay/player_bullet.tscn")
-
+# sound related
 @onready var sfx_player := $SFXPlayer as AudioStreamPlayer2D
 @onready var s_shoot := preload("res://assets/sounds/2hu_p_shoot.wav") as AudioStream
 @onready var s_pickup := preload("res://assets/sounds/2hu_pickup.wav") as AudioStream
+@onready var s_powerup := preload("res://assets/sounds/2hu_powerup.wav") as AudioStream
 
+# external assets
+var bullet := preload("res://scenes/gameplay/player_bullet.tscn")
 @onready var timer := $Timer as Timer
 
 func _physics_process(delta) -> void:
