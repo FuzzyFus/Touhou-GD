@@ -56,7 +56,7 @@ right={
 
 [layer_names]
 
-2d_physics/layer_1="default"
+2d_physics/layer_1="world"
 2d_physics/layer_2="enemies"
 2d_physics/layer_3="bullets"
 2d_physics/layer_4="collectable"
