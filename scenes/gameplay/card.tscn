@@ -9,7 +9,9 @@ region = Rect2(24, 336, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qggmu"]
 
-[node name="Card" type="RigidBody2D"]
+[node name="Card" type="RigidBody2D" groups=["collectable"]]
+collision_layer = 8
+collision_mask = 8
 gravity_scale = 0.1
 linear_velocity = Vector2(0, -100)
 script = ExtResource("1_tbfnn")
@@ -20,8 +22,13 @@ scale = Vector2(1.25, 1.25)
 texture = SubResource("AtlasTexture_ep6ue")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_qggmu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qggmu")
 
 [connection signal="body_entered" from="Area2D" to="." method="on_collision"]

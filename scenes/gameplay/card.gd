@@ -6,6 +6,7 @@ enum type {POINT, POWER, MAX, ONEUP}
 @export var current_type := type.POINT
 
 var float_target
+var float_delta := 0.0
 @onready var sprite := $Sprite2D as Sprite2D
 @onready var hitbox := $Area2D/CollisionShape2D as CollisionShape2D
 
@@ -24,12 +25,12 @@ func _ready() -> void:
 
 func _physics_process(_delta) -> void:
 	if float_target != null:
-		apply_force(global_position.direction_to(float_target))
+		float_delta += _delta
+		apply_force(global_position.direction_to(float_target.global_position) * max(300 - float_delta * 100, 0))
 
 func change_card_type(new_type: int):
 	current_type = new_type
 	
-	print(new_type)
 	match new_type:
 		type.POWER:
 			sprite.texture.set_region(Rect2(8,336,16,16))

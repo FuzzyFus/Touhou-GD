@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://boswif7tqqxag"]
+[gd_scene load_steps=11 format=3 uid="uid://boswif7tqqxag"]
 
 [ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
 [ext_resource type="Script" path="res://scenes/gameplay/projectile_barrier.gd" id="2_0wdu8"]
+[ext_resource type="Script" path="res://scenes/gameplay/float_area.gd" id="3_lyewm"]
 [ext_resource type="PackedScene" uid="uid://bhgccekvt1q3s" path="res://scenes/gameplay/card.tscn" id="3_vkgvg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib3x4"]
@@ -16,6 +17,13 @@ distance = -156.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ljf0b"]
 normal = Vector2(-1, 0)
 distance = -156.0
+
+[sub_resource type="Gradient" id="Gradient_qk7k0"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ixgck"]
+gradient = SubResource("Gradient_qk7k0")
 
 [node name="Gameplay" type="Node2D"]
 
@@ -44,8 +52,8 @@ shape = SubResource("WorldBoundaryShape2D_ljf0b")
 
 [node name="Projectiles" type="Area2D" parent="Boundaries"]
 scale = Vector2(1.2, 1.2)
-collision_layer = 6
-collision_mask = 6
+collision_layer = 14
+collision_mask = 14
 script = ExtResource("2_0wdu8")
 
 [node name="Top" type="CollisionShape2D" parent="Boundaries/Projectiles"]
@@ -63,6 +71,17 @@ shape = SubResource("WorldBoundaryShape2D_e386b")
 [node name="Right" type="CollisionShape2D" parent="Boundaries/Projectiles"]
 position = Vector2(150, 0)
 shape = SubResource("WorldBoundaryShape2D_ljf0b")
+
+[node name="Float Area" type="Area2D" parent="Boundaries"]
+script = ExtResource("3_lyewm")
+
+[node name="Top" type="CollisionShape2D" parent="Boundaries/Float Area"]
+position = Vector2(0, -175)
+shape = SubResource("WorldBoundaryShape2D_ib3x4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Boundaries/Float Area/Top"]
+scale = Vector2(7.5, 0.031)
+texture = SubResource("GradientTexture2D_ixgck")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
@@ -85,3 +104,4 @@ position = Vector2(115, -76)
 current_type = 0
 
 [connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
+[connection signal="body_entered" from="Boundaries/Float Area" to="Boundaries/Float Area" method="on_collision"]
