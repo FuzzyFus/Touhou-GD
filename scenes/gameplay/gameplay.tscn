@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://boswif7tqqxag"]
+[gd_scene load_steps=12 format=3 uid="uid://boswif7tqqxag"]
 
 [ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
-[ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="1_w6hfq"]
 [ext_resource type="Script" path="res://scenes/gameplay/projectile_barrier.gd" id="2_0wdu8"]
 [ext_resource type="Script" path="res://scenes/gameplay/float_area.gd" id="3_lyewm"]
 [ext_resource type="PackedScene" uid="uid://bhgccekvt1q3s" path="res://scenes/gameplay/card.tscn" id="3_vkgvg"]
@@ -28,7 +27,6 @@ colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0)
 gradient = SubResource("Gradient_qk7k0")
 
 [node name="Gameplay" type="Node2D"]
-script = ExtResource("1_w6hfq")
 
 [node name="Player" parent="." instance=ExtResource("1_i33lo")]
 

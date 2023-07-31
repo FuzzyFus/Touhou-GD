@@ -12,6 +12,11 @@ var float_delta := 0.0
 
 var players
 
+func ini(spawn_position : Vector2, new_type: int = type.POINT, offset: Vector2 = Vector2(30,30)) -> void:
+	change_card_type(new_type)
+	global_position = spawn_position + offset * Vector2(randf_range(-1,1), randf_range(-1,1))
+	pass
+	
 func _ready() -> void:
 	# makes sure that the atlas can be safely changed
 	var base_texture : AtlasTexture = sprite.texture
