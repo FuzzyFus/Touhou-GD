@@ -105,6 +105,9 @@ func move_balls(delta) -> void:
 		$RightBall.position = frontPos.lerp(sidePos, ball_t)
 		$LeftBall.position = frontPos.lerp(sidePos, ball_t) * Vector2(-1,1)
 
+func hit() -> void:
+	pass
+
 func _input(ev) -> void:
 	if ev is InputEventKey:
 		if ev.is_action_pressed("slow"):

@@ -28,7 +28,7 @@ func _physics_process(_delta) -> void:
 		float_delta += _delta
 		apply_force(global_position.direction_to(float_target.global_position) * max(300 - float_delta * 100, 0))
 
-func change_card_type(new_type: int):
+func change_card_type(new_type: int) -> void:
 	current_type = new_type
 	
 	match new_type:
@@ -49,7 +49,7 @@ func change_card_type(new_type: int):
 			hitbox.shape.size = Vector2(15,15)
 
 # i think this should be on the player but collision moment, far easier to be on here
-func on_collision(ev):
+func on_collision(ev) -> void:
 	if ev.is_in_group("player"):
 		var player = ev as Player
 		var old_level : int = clamp(floor(player.power / 50), 0, 2)
