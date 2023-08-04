@@ -4,6 +4,7 @@ enum atk_type {NONE, TURTLE1, TURTLE2, SPIN1, NINECONE, LASER, HR}
 var last_attack = atk_type.HR
 
 @onready var turtle_obj = preload("res://scenes/gameplay/enemies/turtle.tscn")
+@onready var bullet_obj = preload("res://scenes/gameplay/enemies/enemy_bullet.tscn")
 @onready var s_shoot_turtle = preload("res://assets/sounds/2hu_e_tan0.wav")
 @onready var s_shoot_bullet = preload("res://assets/sounds/2hu_e_tan1.wav")
 @onready var shoot_player = $SFXPlayer/ShootPlayer as AudioStreamPlayer2D
