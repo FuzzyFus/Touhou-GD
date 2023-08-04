@@ -32,7 +32,6 @@ func death(point_cards: int, power_cards: int = 0, oneup_cards: int = 0) -> void
 	queue_free()
 
 func hit() -> void:
-	# TODO: instant disposing AudioStreamPlayer2D again
 	sfx_player.play()
 	health -= 1
 	if health <= 0:

@@ -81,9 +81,7 @@ func on_collision(ev) -> void:
 		
 		# if leveled up...
 		if old_level < clamp(floor(player.power / 50), 0, 2):
-			# TODO: RAAAAAAHHHH IT CLIPS OTHER SOUNDS!!!!! PAIN!!!!! make instant disposing AudioStreamPlayer2D
-			player.sfx_player.stream = player.s_powerup
-			player.sfx_player.play()
+			Global.expiringAudio.new().ini(self, player.s_powerup)
 		
 		self.queue_free()
 
