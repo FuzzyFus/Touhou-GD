@@ -76,12 +76,11 @@ func on_collision(ev) -> void:
 			_: # type.POINT
 				player.score += 15
 		
-		player.sfx_player.stream = player.s_pickup
-		player.sfx_player.play()
+		Global.expiringAudio.instantiate().ini(player, player.s_pickup)
 		
 		# if leveled up...
 		if old_level < clamp(floor(player.power / 50), 0, 2):
-			Global.expiringAudio.new().ini(self, player.s_powerup)
+			Global.expiringAudio.instantiate().ini(player, player.s_powerup)
 		
 		self.queue_free()
 
