@@ -57,32 +57,33 @@ func change_card_type(new_type: int) -> void:
 func on_collision(ev) -> void:
 	if ev.is_in_group("player"):
 		var player = ev as Player
-		var old_level : int = clamp(floor(player.power / 50), 0, 2)
-		
-		match current_type:
-			type.POWER:
-				player.score += 15
-				if player.power < 150:
-					player.power += 1
+		if !player.invulnerable:
+			var old_level : int = clamp(floor(player.power / 50), 0, 2)
 			
-			type.MAX:
-				player.power = 150
+			match current_type:
+				type.POWER:
+					player.score += 15
+					if player.power < 150:
+						player.power += 1
+				
+				type.MAX:
+					player.power = 150
+				
+				type.ONEUP:
+					player.score += 50
+					if player.lives < 5:
+						player.lives += 1
+				
+				_: # type.POINT
+					player.score += 15
 			
-			type.ONEUP:
-				player.score += 50
-				if player.lives < 5:
-					player.lives += 1
+			Global.expiringAudio.instantiate().ini(player, player.s_pickup)
 			
-			_: # type.POINT
-				player.score += 15
-		
-		Global.expiringAudio.instantiate().ini(player, player.s_pickup)
-		
-		# if leveled up...
-		if old_level < clamp(floor(player.power / 50), 0, 2):
-			Global.expiringAudio.instantiate().ini(player, player.s_powerup)
-		
-		self.queue_free()
+			# if leveled up...
+			if old_level < clamp(floor(player.power / 50), 0, 2):
+				Global.expiringAudio.instantiate().ini(player, player.s_powerup)
+			
+			self.queue_free()
 
 func float_to_player() -> void:
 	var target_player : Player

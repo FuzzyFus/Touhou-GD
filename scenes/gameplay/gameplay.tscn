@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://boswif7tqqxag"]
+[gd_scene load_steps=13 format=3 uid="uid://boswif7tqqxag"]
 
 [ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
 [ext_resource type="Script" path="res://scenes/gameplay/projectile_barrier.gd" id="2_0wdu8"]
 [ext_resource type="Script" path="res://scenes/gameplay/float_area.gd" id="3_lyewm"]
 [ext_resource type="PackedScene" uid="uid://bhgccekvt1q3s" path="res://scenes/gameplay/card.tscn" id="3_vkgvg"]
 [ext_resource type="PackedScene" uid="uid://cm3g24xvc2cqc" path="res://scenes/gameplay/enemies/turtle.tscn" id="5_ca646"]
+[ext_resource type="PackedScene" uid="uid://c1k2lmpwd62y2" path="res://scenes/gameplay/enemies/uk_boss.tscn" id="6_5nnax"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib3x4"]
 normal = Vector2(0, 1)
@@ -117,6 +118,9 @@ position = Vector2(38, -74)
 
 [node name="turtle2" parent="." instance=ExtResource("5_ca646")]
 position = Vector2(43, -217)
+
+[node name="UKBoss" parent="." instance=ExtResource("6_5nnax")]
+position = Vector2(0, -177)
 
 [connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
 [connection signal="body_entered" from="Boundaries/Float Area" to="Boundaries/Float Area" method="on_collision"]

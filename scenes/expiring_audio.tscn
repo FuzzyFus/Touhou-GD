@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cdo85etkxwq21"]
 
-[ext_resource type="Script" path="res://scenes/ExpiringAudio.gd" id="1_14dw4"]
+[ext_resource type="Script" path="res://scenes/expiring_audio.gd" id="1_14dw4"]
 
 [node name="ExpiringAudio" type="AudioStreamPlayer2D"]
 script = ExtResource("1_14dw4")
