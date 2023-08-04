@@ -393,7 +393,6 @@ shooting_delay = 0.1
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qps5x")
 animation = &"idle"
-frame = 1
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f3n5x")

@@ -33,9 +33,8 @@ func _physics_process(_d):
 	linear_velocity = speed
 
 func on_collision(ev):
-	print("wah " + str(ev))
 	if ev.is_in_group("player"):
 		var player = ev as Player
 		if !player.invulnerable:
-			player.hurt()
+			player.hit()
 			queue_free()
