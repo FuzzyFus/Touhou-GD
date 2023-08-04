@@ -14,10 +14,9 @@ gravity_scale = 0.0
 lock_rotation = true
 linear_velocity = Vector2(-100, 30)
 script = ExtResource("1_us58x")
-speed = Vector2(250, 75)
+speed = Vector2(250, 50)
 drops = {
-"oneup_cards": 0,
-"point_cards": 4,
+"point_cards": 5,
 "power_cards": 1
 }
 
