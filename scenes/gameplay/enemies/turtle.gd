@@ -6,15 +6,11 @@ extends RigidBody2D
 var facing_left = true
 @export var speed : Vector2 = Vector2()
 
-# no!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! put this in a gameplay script!!!!!!!!!!!
+# TODO: no!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! put this in a gameplay script!!!!!!!!!!!
 var scene_card := preload("res://scenes/gameplay/card.tscn")
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	linear_velocity = speed * Vector2(-1, 1) if facing_left else speed
-
-func _ready() -> void:
-	#linear_velocity = speed
-	pass
 
 func death(point_cards: int, power_cards: int = 0, oneup_cards: int = 0) -> void:
 	#spawn cards based on input, with random velocity to make it "explode"
@@ -46,10 +42,15 @@ func hit() -> void:
 func on_collision(ev) -> void:
 	if ev.is_in_group("player_projectile"):
 		hit()
+	
+	# ran into the player
 	if ev.is_in_group("player"):
-		# hit player
 		var player = ev as Player
-		player.hit()
+		if not player.invulnerable:
+			player.hit()
+			queue_free()
+	
+	# for bouncing
 	if ev.is_in_group("world_boundary"):
 		if ev.get_name() == "Left" or ev.get_name() == "Right":
 			bounce()

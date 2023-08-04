@@ -1,5 +1,6 @@
 # TODO: make this actually a class instead of just the player script that happens to be a class www
 # important for card collision n such
+
 class_name Player
 extends CharacterBody2D
 
@@ -12,16 +13,23 @@ const SPEED := 300.0
 @export var shooting_delay := 0.3
 var damage_delay := 3.0
 var can_shoot := true
+@export var invulnerable := false
 var slow := false
 
 # TODO: this is stupid. i should probably make a new script for this but im stubborn
 var ball_t := 0.0
 
+@onready var animtree := $AnimationTree as AnimationTree
+@onready var damagetree := $DamageTree as AnimationTree
+@onready var sprite := $Sprite as AnimatedSprite2D
+
 # sound related
 @onready var sfx_player := $SFXPlayer as AudioStreamPlayer2D
-@onready var s_shoot := preload("res://assets/sounds/2hu_p_shoot.wav") as AudioStream
+@onready var shoot_player := $SFXPlayer/ShootPlayer as AudioStreamPlayer2D
 @onready var s_pickup := preload("res://assets/sounds/2hu_pickup.wav") as AudioStream
 @onready var s_powerup := preload("res://assets/sounds/2hu_powerup.wav") as AudioStream
+@onready var s_hit := preload("res://assets/sounds/2hu_p_death.wav") as AudioStream
+@onready var s_death := preload("res://assets/sounds/voc_aaaaa.mp3") as AudioStream
 
 # external assets
 var bullet := preload("res://scenes/gameplay/player_bullet.tscn")
@@ -31,10 +39,10 @@ func _physics_process(delta) -> void:
 	movement()
 	shooting()
 	move_balls(delta)
+	update_animtree()
 	
 func shooting() -> void:
 	if can_shoot and Input.is_action_pressed("shoot"):
-		
 		# spawn bullet(s)
 		# TODO: this code looks bad and i should feel bad! make it iterate?
 		match floor(power / 50):
@@ -66,9 +74,7 @@ func shooting() -> void:
 				right.position = self.position + Vector2(15,0)
 				pass
 		
-		# play sfx
-		sfx_player.stream = s_shoot
-		sfx_player.play()
+		shoot_player.play()
 		
 		# prevent player from shooting, and start timer to reenable shooting
 		can_shoot = false
@@ -81,6 +87,7 @@ func movement() -> void:
 	
 	if direction:
 		velocity = direction * final_speed
+		
 		
 	else:
 		velocity.x = move_toward(velocity.x, 0, final_speed)
@@ -106,7 +113,12 @@ func move_balls(delta) -> void:
 		$LeftBall.position = frontPos.lerp(sidePos, ball_t) * Vector2(-1,1)
 
 func hit() -> void:
-	pass
+	if not invulnerable:
+		lives -= 1
+		
+		damagetree["parameters/conditions/hit"] = true
+		sfx_player.stream = s_hit
+		sfx_player.play()
 
 func _input(ev) -> void:
 	if ev is InputEventKey:
@@ -116,3 +128,17 @@ func _input(ev) -> void:
 		elif ev.is_action_released("slow"):
 			ball_t = 0
 			slow = false
+
+func update_animtree() -> void:
+	var pressing = Input.is_action_pressed("left") or Input.is_action_pressed("right")
+	
+	animtree["parameters/conditions/pressing"] = pressing
+	animtree["parameters/conditions/not_pressing"] = not pressing
+	
+	# hate this, but to make it not flip with no input, this is the best for now
+	if Input.is_action_pressed("left") and Input.is_action_pressed("right"):
+		return
+	elif Input.is_action_pressed("left"):
+		sprite.flip_h = false
+	elif Input.is_action_pressed("right"):
+		sprite.flip_h = true 

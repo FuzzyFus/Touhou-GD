@@ -113,7 +113,10 @@ position = Vector2(115, -76)
 current_type = 0
 
 [node name="turtle" parent="." instance=ExtResource("5_ca646")]
-position = Vector2(30, -150)
+position = Vector2(38, -74)
+
+[node name="turtle2" parent="." instance=ExtResource("5_ca646")]
+position = Vector2(43, -217)
 
 [connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
 [connection signal="body_entered" from="Boundaries/Float Area" to="Boundaries/Float Area" method="on_collision"]
