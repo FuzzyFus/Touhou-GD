@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1k2lmpwd62y2"]
+[gd_scene load_steps=7 format=3 uid="uid://c1k2lmpwd62y2"]
 
 [ext_resource type="Script" path="res://scenes/gameplay/enemies/uk_boss.gd" id="1_0v5jy"]
 [ext_resource type="Texture2D" uid="uid://dcaehmc3sk2xp" path="res://assets/sprites/GB.png" id="1_etsxy"]
 [ext_resource type="AudioStream" uid="uid://ctf6704cc152a" path="res://assets/sounds/2hu_e_tan0.wav" id="3_egcua"]
+[ext_resource type="Script" path="res://scripts/simplerotate.gd" id="3_g1q2a"]
+[ext_resource type="Texture2D" uid="uid://bgl33lecedhlt" path="res://assets/sprites/turtle.png" id="4_lriwv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0wlq"]
 size = Vector2(70, 47)
@@ -30,6 +32,13 @@ debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 position = Vector2(-1, 40)
 
 [node name="Turtles" type="Node2D" parent="SpawnPoints"]
+
+[node name="Spin" type="Node2D" parent="SpawnPoints"]
+script = ExtResource("3_g1q2a")
+speed = 0.75
+
+[node name="Sprite2D" type="Sprite2D" parent="SpawnPoints/Spin"]
+texture = ExtResource("4_lriwv")
 
 [node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
 

@@ -11,10 +11,6 @@ var last_attack = atk_type.HR
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
 	pass
 
 func attack() -> void:
@@ -35,13 +31,31 @@ func attack() -> void:
 				await(get_tree().create_timer(0.2).timeout)
 		
 		atk_type.SPIN1:
-			pass
+			var direction = 0.0
+			var bullet_count = 10
+			shoot_player.stream = s_shoot_bullet
+			
+			for i in 16: # total shots
+				for b in bullet_count: # each bullet per shot
+					# rotate bullet equally between each other
+					direction = b * (360 / bullet_count) + $SpawnPoints/Spin.rotation_degrees
+					shoot_bullet($SpawnPoints/Spin.global_position, deg_to_rad(direction), 75)
+				shoot_player.play()
+				await(get_tree().create_timer(0.2).timeout)
+		
 		atk_type.NINECONE:
 			pass
 		atk_type.LASER:
 			pass
 		atk_type.HR:
 			pass
+
+func shoot_bullet(spawn_location, direction, speed):
+	var bullet = bullet_obj.instantiate()
+	get_parent().add_child(bullet)
+	bullet.global_position = spawn_location
+	bullet.ini(Vector2.from_angle(direction).normalized() * speed, "red")
+	pass
 
 func shoot_turtle():
 	var turtle = turtle_obj.instantiate()

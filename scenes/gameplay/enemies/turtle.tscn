@@ -30,7 +30,7 @@ texture = ExtResource("1_wxr2l")
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["enemy", "enemy_projectile"]]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_mg4hr")
 debug_color = Color(0.960784, 0, 0.505882, 0.419608)

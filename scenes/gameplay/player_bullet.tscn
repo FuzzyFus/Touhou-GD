@@ -22,5 +22,7 @@ texture = SubResource("AtlasTexture_1xr7a")
 script = ExtResource("2_xlx0s")
 speed = 200.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["player_projectile"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_ev4hp")
