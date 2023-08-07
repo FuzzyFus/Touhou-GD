@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2kssdnlbtsbp"]
+[gd_scene load_steps=6 format=3 uid="uid://b2kssdnlbtsbp"]
 
 [ext_resource type="Texture2D" uid="uid://610fg6jjl2u2" path="res://assets/sprites/PC Computer - Touhou Youyoumu Perfect Cherry Blossom - Characters.png" id="1_depb4"]
+[ext_resource type="Script" path="res://scenes/gameplay/player_bullet.gd" id="1_e2jn3"]
 [ext_resource type="Script" path="res://scripts/simplerotate.gd" id="2_xlx0s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xr7a"]
@@ -15,6 +16,7 @@ collision_layer = 2
 collision_mask = 2
 gravity_scale = 0.0
 linear_velocity = Vector2(0, -1000)
+script = ExtResource("1_e2jn3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.5, 1.5)

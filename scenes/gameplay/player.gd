@@ -54,24 +54,30 @@ func shooting() -> void:
 			1: # level 2, 100 cards. double shot
 				var left = bullet.instantiate()
 				get_parent().add_child(left)
-				left.position = self.position + Vector2(-10,0)
+				left.position = self.position + Vector2(0,0)
+				left.ini(Vector2.from_angle(deg_to_rad(-95)).normalized() * 1000)
 				
 				var right = bullet.instantiate()
 				get_parent().add_child(right)
-				right.position = self.position + Vector2(10,0)
+				right.position = self.position + Vector2(0,0)
+				right.ini(Vector2.from_angle(deg_to_rad(-85)).normalized() * 1000)
 			
 			_: # level 3, 150+ cards. triple shot
 				var left = bullet.instantiate()
 				get_parent().add_child(left)
-				left.position = self.position + Vector2(-15,0)
+				left.position = self.position + Vector2(-10,0)
+				left.rotation_degrees = 15
+				left.ini(Vector2.from_angle(deg_to_rad(-97)).normalized() * 1000)
 				
 				var middle = bullet.instantiate()
 				get_parent().add_child(middle)
 				middle.position = self.position + Vector2(0,-10)
+				middle.ini(Vector2.from_angle(deg_to_rad(-90)).normalized() * 1000)
 				
 				var right = bullet.instantiate()
 				get_parent().add_child(right)
-				right.position = self.position + Vector2(15,0)
+				right.position = self.position + Vector2(10,0)
+				right.ini(Vector2.from_angle(deg_to_rad(-83)).normalized() * 1000)
 				pass
 		
 		shoot_player.play()
