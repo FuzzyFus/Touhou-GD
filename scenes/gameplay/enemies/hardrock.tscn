@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b246ptna7vtb8"]
+
+[ext_resource type="Script" path="res://scenes/gameplay/enemies/hardrock.gd" id="1_mwmft"]
+[ext_resource type="Texture2D" uid="uid://cpqc4gfegop7x" path="res://assets/sprites/hardrock.png" id="1_rv0to"]
+[ext_resource type="AudioStream" uid="uid://esko3nl3xgvo" path="res://assets/sounds/2hu_e_charge.wav" id="3_u5b4r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5n1y"]
+size = Vector2(58, 58)
+
+[node name="HardRock" type="RigidBody2D" groups=["hardrock"]]
+collision_layer = 4
+collision_mask = 4
+gravity_scale = 0.0
+script = ExtResource("1_mwmft")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("1_rv0to")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_u5n1y")
+
+[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_u5b4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_u5n1y")

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://esko3nl3xgvo"
-path="res://.godot/imported/2hu_e_power.wav-6c6ca2461a13122415958bb2af7d0b63.sample"
+path="res://.godot/imported/2hu_e_charge.wav-b3678317a4e5ac3bdc7b752319e50460.sample"
 
 [deps]
 
-source_file="res://assets/sounds/2hu_e_power.wav"
-dest_files=["res://.godot/imported/2hu_e_power.wav-6c6ca2461a13122415958bb2af7d0b63.sample"]
+source_file="res://assets/sounds/2hu_e_charge.wav"
+dest_files=["res://.godot/imported/2hu_e_charge.wav-b3678317a4e5ac3bdc7b752319e50460.sample"]
 
 [params]
 

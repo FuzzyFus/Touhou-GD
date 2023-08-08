@@ -1,12 +1,15 @@
 extends RigidBody2D
 
 @export var speed := Vector2(0,250)
+@export var gravity := Vector2(0,0)
 @onready var sprite : Sprite2D
+var time := 0.0
 
 func _ready() -> void:
 	sprite = $Sprite2D as Sprite2D
 
-func ini(new_speed : Vector2, colour : String = "default"):
+func ini(new_speed : Vector2, colour : String = "default", new_gravity := 0.0):
+	gravity = Vector2(0,new_gravity)
 	speed = new_speed
 	
 #	if colour != "default":
@@ -33,7 +36,8 @@ func ini(new_speed : Vector2, colour : String = "default"):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_d):
-	linear_velocity = speed
+	time += _d
+	linear_velocity = speed + (gravity * time)
 
 func on_collision(ev):
 	if ev.is_in_group("player"):

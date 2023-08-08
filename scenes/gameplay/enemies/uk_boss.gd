@@ -5,6 +5,7 @@ var last_attack = atk_type.HR
 
 @onready var turtle_obj = preload("res://scenes/gameplay/enemies/turtle.tscn")
 @onready var bullet_obj = preload("res://scenes/gameplay/enemies/enemy_bullet.tscn")
+@onready var hr_obj = preload("res://scenes/gameplay/enemies/hardrock.tscn")
 @onready var s_shoot_turtle = preload("res://assets/sounds/2hu_e_tan0.wav")
 @onready var s_shoot_bullet = preload("res://assets/sounds/2hu_e_tan1.wav")
 @onready var shoot_player = $SFXPlayer/ShootPlayer as AudioStreamPlayer2D
@@ -59,6 +60,7 @@ func attack() -> void:
 				shoot_bullet($SpawnPoints/Cone/four.global_position * Vector2(-1,1), 130, 100)
 				shoot_player.play()
 				await(get_tree().create_timer(0.2).timeout)
+		
 		atk_type.LASER:
 			laser_player.play()
 			for i in 6: # total waves of bullets
@@ -71,10 +73,15 @@ func attack() -> void:
 									shoot_bullet(Vector2(-150 + (100 * b), -270), 90, 150)
 							await(get_tree().create_timer(0.1).timeout)
 				await(get_tree().create_timer(0.3).timeout)
+		
 		atk_type.HR:
-			pass
+			for i in 3:
+				var hr = hr_obj.instantiate()
+				get_parent().add_child(hr)
+				hr.global_position = $SpawnPoints/Cone/center.global_position
+				await(get_tree().create_timer(2).timeout)
 
-func shoot_bullet(spawn_location: Vector2, direction: float, speed: float):
+func shoot_bullet(spawn_location, direction: float, speed: float):
 	var bullet = bullet_obj.instantiate()
 	get_parent().add_child(bullet)
 	bullet.global_position = spawn_location

@@ -6,3 +6,5 @@ func _on_body_entered(ev):
 			ev.get_parent().queue_free()
 		else:
 			ev.queue_free()
+	elif ev.is_in_group("hardrock"):
+		ev.explode()
