@@ -1,3 +1,4 @@
+# TODO: fix colour
 extends RigidBody2D
 
 @export var speed := Vector2(0,250)

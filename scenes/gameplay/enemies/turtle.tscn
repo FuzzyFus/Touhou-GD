@@ -17,7 +17,7 @@ script = ExtResource("1_us58x")
 speed = Vector2(250, 50)
 drops = {
 "oneup_cards": 0,
-"point_cards": 4,
+"point_cards": 2,
 "power_cards": 1
 }
 health = 6
@@ -38,4 +38,5 @@ debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 [node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_2pxyt")
 
+[connection signal="area_entered" from="Area2D" to="." method="on_collision"]
 [connection signal="body_entered" from="Area2D" to="." method="on_collision"]
