@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+var grazed = false
 var direction : Vector2
 var speed := 500.0
 var locked_in := false
@@ -53,3 +54,10 @@ func shoot_bullet(spawn_location: Vector2, direction: float, speed: float):
 	get_parent().add_child(bullet)
 	bullet.global_position = spawn_location
 	bullet.ini(Vector2.from_angle(deg_to_rad(direction)).normalized() * speed, "red", 100)
+
+func on_collision(ev) -> void:
+	if ev.is_in_group("player"):
+		var player = ev as Player
+		if not player.invulnerable:
+			player.hit()
+			explode()

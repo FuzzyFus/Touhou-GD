@@ -55,6 +55,9 @@ func change_card_type(new_type: int) -> void:
 
 # i think this should be on the player but collision moment, far easier to be on here
 func on_collision(ev) -> void:
+	if ev.is_in_group("graze"): # redirect to player
+		ev = ev.get_parent()
+	
 	if ev.is_in_group("player"):
 		var player = ev as Player
 		if !player.invulnerable:
@@ -63,11 +66,11 @@ func on_collision(ev) -> void:
 			match current_type:
 				type.POWER:
 					player.score += 15
-					if player.power < 150:
+					if player.power < 50:
 						player.power += 1
 				
 				type.MAX:
-					player.power = 150
+					player.power = 50
 				
 				type.ONEUP:
 					player.score += 50

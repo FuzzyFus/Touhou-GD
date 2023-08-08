@@ -9,7 +9,7 @@ extends CharacterBody2D
 @export var power = 0
 @export var score = 0
 @export var lives = 1
-const SPEED := 300.0
+const SPEED := 250.0
 
 @export var shooting_delay := 0.3
 var damage_delay := 3.0
@@ -23,6 +23,8 @@ var ball_t := 0.0
 @onready var animtree := $AnimationTree as AnimationTree
 @onready var damagetree := $DamageTree as AnimationTree
 @onready var sprite := $Sprite as AnimatedSprite2D
+
+@onready var graze_emitter := $Graze/GrazeEmitter as CPUParticles2D
 
 # sound related
 @onready var sfx_player := $SFXPlayer as AudioStreamPlayer2D
@@ -46,13 +48,13 @@ func shooting() -> void:
 	if can_shoot and Input.is_action_pressed("shoot"):
 		# spawn bullet(s)
 		# TODO: this code looks bad and i should feel bad! make it iterate?
-		match floor(power / 50):
-			0: # level 1, 50 cards. single shot
+		match floor(power / 25):
+			0: # level 1, 0 cards. single shot
 				var middle = bullet.instantiate()
 				get_parent().add_child(middle)
 				middle.position = self.position
 				
-			1: # level 2, 100 cards. double shot
+			1: # level 2, 25 cards. double shot
 				var left = bullet.instantiate()
 				get_parent().add_child(left)
 				left.position = self.position + Vector2(0,0)
@@ -63,7 +65,7 @@ func shooting() -> void:
 				right.position = self.position + Vector2(0,0)
 				right.ini(Vector2.from_angle(deg_to_rad(-85)).normalized() * 1000)
 			
-			_: # level 3, 150+ cards. triple shot
+			_: # level 3, 50+ cards. triple shot
 				var left = bullet.instantiate()
 				get_parent().add_child(left)
 				left.position = self.position + Vector2(-10,0)
@@ -149,3 +151,12 @@ func update_animtree() -> void:
 		sprite.flip_h = false
 	elif Input.is_action_pressed("right"):
 		sprite.flip_h = true 
+
+func check_graze(ev) -> void:
+	if ev.is_in_group("enemy_projectile") and invulnerable == false:
+		ev = ev.get_parent()
+		if ev.grazed == false:
+			ev.grazed = true
+			graze_emitter.restart()
+			graze_emitter.emitting = true
+			$Graze/GrazePlayer.play()

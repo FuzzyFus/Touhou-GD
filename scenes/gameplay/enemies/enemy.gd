@@ -2,6 +2,7 @@
 class_name Enemy
 extends RigidBody2D
 
+var grazed = false
 @export var drops := {"point_cards": 3, "power_cards": 1, "oneup_cards": 0}
 @export var health : int = 9
 var sfx_player: AudioStreamPlayer2D

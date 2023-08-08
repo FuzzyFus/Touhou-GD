@@ -24,11 +24,9 @@ func attack() -> void:
 	
 	# run rng to choose which attack
 	var rng = randi_range(1,6)
-	# check if rng is equal to the last 2 attacks
-	print("rng = ", rng)
 	
+	# check if rng is equal to the last 2 attacks
 	while last_attacks.has(rng):
-		print("last_attacks = ", last_attacks)
 		if rng == 6:
 			rng = 1
 		else:

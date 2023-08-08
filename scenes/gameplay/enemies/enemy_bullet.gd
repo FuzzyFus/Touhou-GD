@@ -1,6 +1,7 @@
 # TODO: fix colour
 extends RigidBody2D
 
+var grazed = false
 @export var speed := Vector2(0,250)
 @export var gravity := Vector2(0,0)
 @onready var sprite : Sprite2D
