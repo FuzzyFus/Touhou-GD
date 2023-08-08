@@ -1,6 +1,6 @@
 extends Enemy
 
-enum atk_type {NONE, TURTLE1, TURTLE2, SPIN1, NINECONE, LASER, HR}
+enum atk_type {NONE, TURTLE1, TURTLE2, SPIN1, CONE, LASER, HR}
 var last_attack = atk_type.HR
 
 @onready var turtle_obj = preload("res://scenes/gameplay/enemies/turtle.tscn")
@@ -39,23 +39,35 @@ func attack() -> void:
 				for b in bullet_count: # each bullet per shot
 					# rotate bullet equally between each other
 					direction = b * (360 / bullet_count) + $SpawnPoints/Spin.rotation_degrees
-					shoot_bullet($SpawnPoints/Spin.global_position, deg_to_rad(direction), 75)
+					shoot_bullet($SpawnPoints/Spin.global_position, direction, 75)
 				shoot_player.play()
 				await(get_tree().create_timer(0.2).timeout)
 		
-		atk_type.NINECONE:
-			pass
+		atk_type.CONE:
+			shoot_player.stream = s_shoot_bullet
+			for i in 15:
+				shoot_bullet($SpawnPoints/Cone/center.global_position, 90, 100)
+				shoot_bullet($SpawnPoints/Cone/one.global_position, 80, 100)
+				shoot_bullet($SpawnPoints/Cone/two.global_position, 70, 100)
+				shoot_bullet($SpawnPoints/Cone/three.global_position, 60, 100)
+				shoot_bullet($SpawnPoints/Cone/four.global_position, 50, 100)
+				
+				shoot_bullet($SpawnPoints/Cone/one.global_position * Vector2(-1,1), 100, 100)
+				shoot_bullet($SpawnPoints/Cone/two.global_position * Vector2(-1,1), 110, 100)
+				shoot_bullet($SpawnPoints/Cone/three.global_position * Vector2(-1,1), 120, 100)
+				shoot_bullet($SpawnPoints/Cone/four.global_position * Vector2(-1,1), 130, 100)
+				shoot_player.play()
+				await(get_tree().create_timer(0.2).timeout)
 		atk_type.LASER:
 			pass
 		atk_type.HR:
 			pass
 
-func shoot_bullet(spawn_location, direction, speed):
+func shoot_bullet(spawn_location: Vector2, direction: float, speed: float):
 	var bullet = bullet_obj.instantiate()
 	get_parent().add_child(bullet)
 	bullet.global_position = spawn_location
-	bullet.ini(Vector2.from_angle(direction).normalized() * speed, "red")
-	pass
+	bullet.ini(Vector2.from_angle(deg_to_rad(direction)).normalized() * speed, "red")
 
 func shoot_turtle():
 	var turtle = turtle_obj.instantiate()

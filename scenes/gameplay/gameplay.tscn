@@ -6,6 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://bhgccekvt1q3s" path="res://scenes/gameplay/card.tscn" id="3_vkgvg"]
 [ext_resource type="PackedScene" uid="uid://c1k2lmpwd62y2" path="res://scenes/gameplay/enemies/uk_boss.tscn" id="6_5nnax"]
 
+[sub_resource type="Gradient" id="Gradient_qk7k0"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ixgck"]
+gradient = SubResource("Gradient_qk7k0")
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib3x4"]
 normal = Vector2(0, 1)
 
@@ -19,16 +26,21 @@ distance = -156.0
 normal = Vector2(-1, 0)
 distance = -156.0
 
-[sub_resource type="Gradient" id="Gradient_qk7k0"]
-offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ixgck"]
-gradient = SubResource("Gradient_qk7k0")
-
 [node name="Gameplay" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_i33lo")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-245, -26)
+rotation = 1.5708
+scale = Vector2(150, 0.03)
+texture = SubResource("GradientTexture2D_ixgck")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(245, -26)
+rotation = 1.5708
+scale = Vector2(150, 0.03)
+texture = SubResource("GradientTexture2D_ixgck")
 
 [node name="Boundaries" type="Node2D" parent="."]
 

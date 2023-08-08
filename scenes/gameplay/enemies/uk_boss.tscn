@@ -36,6 +36,29 @@ position = Vector2(-1, 40)
 script = ExtResource("3_g1q2a")
 speed = 0.75
 
+[node name="Cone" type="Node2D" parent="SpawnPoints"]
+position = Vector2(1, -40)
+
+[node name="center" type="Node2D" parent="SpawnPoints/Cone"]
+position = Vector2(5.96046e-08, 40)
+scale = Vector2(0.1, 0.1)
+
+[node name="one" type="Node2D" parent="SpawnPoints/Cone"]
+position = Vector2(20, 35)
+scale = Vector2(0.1, 0.1)
+
+[node name="two" type="Node2D" parent="SpawnPoints/Cone"]
+position = Vector2(40, 26)
+scale = Vector2(0.1, 0.1)
+
+[node name="three" type="Node2D" parent="SpawnPoints/Cone"]
+position = Vector2(55, 13)
+scale = Vector2(0.1, 0.1)
+
+[node name="four" type="Node2D" parent="SpawnPoints/Cone"]
+position = Vector2(60, -4)
+scale = Vector2(0.1, 0.1)
+
 [node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
 
 [node name="ShootPlayer" type="AudioStreamPlayer2D" parent="SFXPlayer"]
