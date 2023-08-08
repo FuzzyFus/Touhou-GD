@@ -31,13 +31,13 @@ distance = -156.0
 [node name="Player" parent="." instance=ExtResource("1_i33lo")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-245, -26)
+position = Vector2(-205, -26)
 rotation = 1.5708
 scale = Vector2(150, 0.03)
 texture = SubResource("GradientTexture2D_ixgck")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(245, -26)
+position = Vector2(205, -26)
 rotation = 1.5708
 scale = Vector2(150, 0.03)
 texture = SubResource("GradientTexture2D_ixgck")
@@ -59,11 +59,11 @@ position = Vector2(0, 324)
 shape = SubResource("WorldBoundaryShape2D_x0o0l")
 
 [node name="Left" type="CollisionShape2D" parent="Boundaries/Projectiles"]
-position = Vector2(-150, 0)
+position = Vector2(-100, 0)
 shape = SubResource("WorldBoundaryShape2D_e386b")
 
 [node name="Right" type="CollisionShape2D" parent="Boundaries/Projectiles"]
-position = Vector2(150, 0)
+position = Vector2(100, 0)
 shape = SubResource("WorldBoundaryShape2D_ljf0b")
 
 [node name="Float Area" type="Area2D" parent="Boundaries"]
@@ -94,14 +94,14 @@ shape = SubResource("WorldBoundaryShape2D_x0o0l")
 scale = Vector2(0.8, 0.8)
 
 [node name="Right" type="CollisionShape2D" parent="Boundaries/World/Right"]
-position = Vector2(150, 0)
+position = Vector2(100, 0)
 shape = SubResource("WorldBoundaryShape2D_ljf0b")
 
 [node name="Left" type="StaticBody2D" parent="Boundaries/World" groups=["world_boundary"]]
 scale = Vector2(0.8, 0.8)
 
 [node name="Left" type="CollisionShape2D" parent="Boundaries/World/Left"]
-position = Vector2(-150, 0)
+position = Vector2(-100, 0)
 shape = SubResource("WorldBoundaryShape2D_e386b")
 
 [node name="Camera2D" type="Camera2D" parent="."]

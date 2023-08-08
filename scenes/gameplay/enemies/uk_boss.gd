@@ -8,6 +8,7 @@ var last_attack = atk_type.HR
 @onready var s_shoot_turtle = preload("res://assets/sounds/2hu_e_tan0.wav")
 @onready var s_shoot_bullet = preload("res://assets/sounds/2hu_e_tan1.wav")
 @onready var shoot_player = $SFXPlayer/ShootPlayer as AudioStreamPlayer2D
+@onready var laser_player = $SFXPlayer/LaserPlayer as AudioStreamPlayer2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -59,7 +60,17 @@ func attack() -> void:
 				shoot_player.play()
 				await(get_tree().create_timer(0.2).timeout)
 		atk_type.LASER:
-			pass
+			laser_player.play()
+			for i in 6: # total waves of bullets
+				for x in 5: # amount of bullets in wave
+							if i % 2 == 0: # for outside spawn points
+								for b in 5:
+									shoot_bullet(Vector2(-200 + (100 * b), -270), 90, 150)
+							else: # for inside spawn points
+								for b in 4:
+									shoot_bullet(Vector2(-150 + (100 * b), -270), 90, 150)
+							await(get_tree().create_timer(0.1).timeout)
+				await(get_tree().create_timer(0.3).timeout)
 		atk_type.HR:
 			pass
 
