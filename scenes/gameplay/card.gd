@@ -31,7 +31,7 @@ func _ready() -> void:
 func _physics_process(_delta) -> void:
 	if float_target != null:
 		float_delta += _delta
-		apply_force(global_position.direction_to(float_target.global_position) * max(300 - float_delta * 100, 0))
+		apply_force(global_position.direction_to(float_target.global_position) * max(500 - float_delta * 100, 0))
 
 func change_card_type(new_type: int) -> void:
 	current_type = new_type

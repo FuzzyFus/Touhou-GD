@@ -5,22 +5,22 @@ extends Enemy
 
 @onready var shoot_player = $SFXPlayer/ShootPlayer as AudioStreamPlayer2D
 
-func shoot_bullet(spawn_location, direction: float, speed: float):
+func shoot_bullet(spawn_location, direction: float, speed: float, colour := "red"):
 	var bullet = bullet_obj.instantiate()
 	get_parent().add_child(bullet)
 	bullet.global_position = spawn_location
-	bullet.ini(Vector2.from_angle(deg_to_rad(direction)).normalized() * speed, "red")
+	bullet.ini(Vector2.from_angle(deg_to_rad(direction)).normalized() * speed, colour)
 
 func _ready() -> void:
 	# take turns between bullet speeds, getting faster
 	await(get_tree().create_timer(0.1).timeout)
 
 	for i in 12:
-		shoot_bullet(global_position, randf_range(0,360), 100)
+		shoot_bullet(global_position, randf_range(0,360), 100, "blue")
 		shoot_player.play()
 		await(get_tree().create_timer(0.25).timeout)
 	for i in 20:
-		shoot_bullet(global_position, randf_range(0,360), 150)
+		shoot_bullet(global_position, randf_range(0,360), 150, "yellow")
 		shoot_player.play()
 		await(get_tree().create_timer(0.15).timeout)
 	for i in 35:
@@ -33,7 +33,7 @@ func _ready() -> void:
 	
 	Global.expiring_audio.instantiate().ini(get_parent(), s_explode, self.global_position)
 	for i in 150:
-		shoot_bullet(global_position, randf_range(0,360), randf_range(100,250))
+		shoot_bullet(global_position, randf_range(0,360), randf_range(100,250), "orange")
 
 	for card in drops["point_cards"]:
 		var instance = Global.scene_card.instantiate()
