@@ -2,7 +2,7 @@ extends Enemy
 
 enum atk_type {NONE, TURTLE1, TURTLE2, SPIN1, CONE, LASER, HR}
 var last_attacks = []
-var attacking = true
+var attacking = false
 
 @onready var turtle_obj = preload("res://scenes/gameplay/enemies/turtle.tscn")
 @onready var bullet_obj = preload("res://scenes/gameplay/enemies/enemy_bullet.tscn")
@@ -66,7 +66,7 @@ func attack() -> void:
 				for b in bullet_count: # each bullet per shot
 					# rotate bullet equally between each other
 					direction = b * (360 / bullet_count) + $SpawnPoints/Spin.rotation_degrees
-					shoot_bullet($SpawnPoints/Spin.global_position, direction, 75)
+					shoot_bullet($SpawnPoints/Spin.global_position, direction, 75, "blue")
 				shoot_player.play()
 				await(get_tree().create_timer(0.2).timeout)
 			delay = 3
@@ -105,11 +105,11 @@ func attack() -> void:
 	await(get_tree().create_timer(delay).timeout)
 	attacking = false
 
-func shoot_bullet(spawn_location, direction: float, speed: float):
+func shoot_bullet(spawn_location, direction: float, speed: float, colour := "red"):
 	var bullet = bullet_obj.instantiate()
 	get_parent().add_child(bullet)
 	bullet.global_position = spawn_location
-	bullet.ini(Vector2.from_angle(deg_to_rad(direction)).normalized() * speed, "red")
+	bullet.ini(Vector2.from_angle(deg_to_rad(direction)).normalized() * speed, colour)
 
 func shoot_turtle():
 	var turtle = turtle_obj.instantiate()
@@ -126,10 +126,10 @@ func laser() -> void:
 		for x in 5: # amount of bullets in wave
 					if i % 2 == 0: # for outside spawn points
 						for b in 5:
-							shoot_bullet(Vector2(-200 + (100 * b), -270), 90, 150)
+							shoot_bullet(Vector2(-200 + (100 * b), -270), 90, 150, "yellow")
 					else: # for inside spawn points
 						for b in 4:
-							shoot_bullet(Vector2(-150 + (100 * b), -270), 90, 150)
+							shoot_bullet(Vector2(-150 + (100 * b), -270), 90, 150, "yellow")
 					await(get_tree().create_timer(0.1).timeout)
 		await(get_tree().create_timer(0.3).timeout)
 

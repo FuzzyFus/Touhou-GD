@@ -18,7 +18,6 @@ drops = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(1, 0.301961, 0.301961, 1)
 texture = ExtResource("2_7i6il")
 
 [node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]

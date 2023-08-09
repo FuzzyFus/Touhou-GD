@@ -53,7 +53,7 @@ func shoot_bullet(spawn_location: Vector2, direction: float, speed: float):
 	var bullet = bullet_obj.instantiate()
 	get_parent().add_child(bullet)
 	bullet.global_position = spawn_location
-	bullet.ini(Vector2.from_angle(deg_to_rad(direction)).normalized() * speed, "red", 100)
+	bullet.ini(Vector2.from_angle(deg_to_rad(direction)).normalized() * speed, "orange", 100)
 
 func on_collision(ev) -> void:
 	if ev.is_in_group("player"):
