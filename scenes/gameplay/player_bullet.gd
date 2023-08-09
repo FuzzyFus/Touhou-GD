@@ -8,3 +8,13 @@ func _physics_process(_d):
 
 func ini(new_speed : Vector2):
 	speed = new_speed
+
+func on_collision(ev):
+	pass
+	# TODO: FIX MEEEEEEEEEEEEEEEEEEEEEE BULLETS DONT REMOVE WHEN COLLIDING
+	#print(ev.get_groups())
+	# this crashes the engine
+#	if ev.is_in_group("enemy"):
+#		var enemy = ev as Enemy
+#		enemy.hit()
+#		queue_free()

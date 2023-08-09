@@ -130,3 +130,13 @@ func laser() -> void:
 							shoot_bullet(Vector2(-150 + (100 * b), -270), 90, 150)
 					await(get_tree().create_timer(0.1).timeout)
 		await(get_tree().create_timer(0.3).timeout)
+
+func on_collision(ev) -> void:
+	if ev.is_in_group("player_projectile"):
+		hit()
+	
+	# ran into the player
+	if ev.is_in_group("player"):
+		var player = ev as Player
+		if not player.invulnerable:
+			player.hit()

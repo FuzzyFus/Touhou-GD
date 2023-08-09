@@ -129,6 +129,7 @@ current_type = 0
 position = Vector2(0, -177)
 
 [node name="UI" parent="." instance=ExtResource("6_jqspk")]
+custom_minimum_size = Vector2(922, 518)
 
 [connection signal="area_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
 [connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]

@@ -160,3 +160,4 @@ func check_graze(ev) -> void:
 			graze_emitter.restart()
 			graze_emitter.emitting = true
 			$Graze/GrazePlayer.play()
+			score += 1
