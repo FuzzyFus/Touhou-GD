@@ -8,4 +8,4 @@ func on_collision(ev):
 		print("making " + str(cards.size()) + " cards float to player")
 		for card in cards:
 			# TODO: maybe make this function send the player who collided, and make it target them instead of closest?
-			card.float_to_player()
+			card.get_parent().float_to_player()

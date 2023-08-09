@@ -1,7 +1,6 @@
 extends Control
 
 @onready var debug_text := $right/Label as Label
-@onready var uk := $"../UKBoss" as Enemy
 @onready var healthbar := $BossHealthBar as ProgressBar
 var players: Array
 
@@ -14,4 +13,3 @@ func _process(delta):
 	debug_text.text += "\npower: " + str(players[0].power) + "/50"
 	debug_text.text += "\nlives: " + str(players[0].lives)
 	
-	healthbar.value = uk.health

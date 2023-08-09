@@ -2,13 +2,15 @@ extends Enemy
 
 enum atk_type {NONE, TURTLE1, TURTLE2, SPIN1, CONE, LASER, HR}
 var last_attacks = []
-var attacking = false
+var attacking = true
 
 @onready var turtle_obj = preload("res://scenes/gameplay/enemies/turtle.tscn")
 @onready var bullet_obj = preload("res://scenes/gameplay/enemies/enemy_bullet.tscn")
 @onready var hr_obj = preload("res://scenes/gameplay/enemies/hardrock.tscn")
 @onready var s_shoot_turtle = preload("res://assets/sounds/2hu_e_tan0.wav")
 @onready var s_shoot_bullet = preload("res://assets/sounds/2hu_e_tan1.wav")
+@onready var s_explode = preload("res://assets/sounds/bigboom.wav")
+@onready var swansong_obj = preload("res://scenes/gameplay/enemies/uk_swansong.tscn")
 @onready var shoot_player = $SFXPlayer/ShootPlayer as AudioStreamPlayer2D
 @onready var laser_player = $SFXPlayer/LaserPlayer as AudioStreamPlayer2D
 
@@ -132,11 +134,28 @@ func laser() -> void:
 		await(get_tree().create_timer(0.3).timeout)
 
 func on_collision(ev) -> void:
-	if ev.is_in_group("player_projectile"):
-		hit()
+	if health > 0:
+		if ev.is_in_group("player_projectile"):
+			hit()
+		
+		# ran into the player
+		if ev.is_in_group("player"):
+			var player = ev as Player
+			if not player.invulnerable:
+				player.hit()
+
+func death() -> void:
+	var swsng = swansong_obj.instantiate()
+	get_parent().add_child(swsng)
+	swsng.global_position = global_position
 	
-	# ran into the player
-	if ev.is_in_group("player"):
-		var player = ev as Player
-		if not player.invulnerable:
-			player.hit()
+	await(get_tree().create_timer(0.1).timeout)
+	var check = get_tree().get_nodes_in_group("swansong")
+	if check.size() > 1:
+		var x = 0
+		for obj in check:
+			if x > 0:
+				obj.queue_free()
+			x += 1
+	
+	queue_free()

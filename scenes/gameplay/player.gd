@@ -33,6 +33,7 @@ var ball_t := 0.0
 @onready var s_powerup := preload("res://assets/sounds/2hu_powerup.wav") as AudioStream
 @onready var s_hit := preload("res://assets/sounds/2hu_p_death.wav") as AudioStream
 @onready var s_death := preload("res://assets/sounds/voc_aaaaa.mp3") as AudioStream
+@onready var s_oneup := preload("res://assets/sounds/se_bonus.wav") as AudioStream
 
 # external assets
 var bullet := preload("res://scenes/gameplay/player_bullet.tscn")

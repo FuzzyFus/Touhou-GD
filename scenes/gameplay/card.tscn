@@ -9,7 +9,7 @@ region = Rect2(24, 336, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qggmu"]
 
-[node name="Card" type="RigidBody2D" groups=["collectable"]]
+[node name="Card" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 8
 gravity_scale = 0.1
@@ -22,7 +22,7 @@ current_type = 3
 scale = Vector2(1.25, 1.25)
 texture = SubResource("AtlasTexture_ep6ue")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["collectable"]]
 collision_layer = 9
 collision_mask = 9
 

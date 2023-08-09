@@ -76,6 +76,7 @@ func on_collision(ev) -> void:
 					player.score += 50
 					if player.lives < 5:
 						player.lives += 1
+						Global.expiring_audio.instantiate().ini(player, player.s_oneup)
 				
 				_: # type.POINT
 					player.score += 15
