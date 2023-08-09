@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://boswif7tqqxag"]
+[gd_scene load_steps=13 format=3 uid="uid://boswif7tqqxag"]
 
 [ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
 [ext_resource type="Script" path="res://scenes/gameplay/projectile_barrier.gd" id="2_0wdu8"]
 [ext_resource type="Script" path="res://scenes/gameplay/float_area.gd" id="3_lyewm"]
 [ext_resource type="PackedScene" uid="uid://bhgccekvt1q3s" path="res://scenes/gameplay/card.tscn" id="3_vkgvg"]
 [ext_resource type="PackedScene" uid="uid://c1k2lmpwd62y2" path="res://scenes/gameplay/enemies/uk_boss.tscn" id="6_5nnax"]
+[ext_resource type="PackedScene" uid="uid://uhnxjo300qtt" path="res://scenes/gameplay/ui/ui.tscn" id="6_jqspk"]
 
 [sub_resource type="Gradient" id="Gradient_qk7k0"]
 offsets = PackedFloat32Array(0, 0.5, 1)
@@ -126,6 +127,8 @@ current_type = 0
 
 [node name="UKBoss" parent="." instance=ExtResource("6_5nnax")]
 position = Vector2(0, -177)
+
+[node name="UI" parent="." instance=ExtResource("6_jqspk")]
 
 [connection signal="area_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
 [connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
