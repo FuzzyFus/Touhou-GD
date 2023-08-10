@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cccedwdy5ljis"]
+[gd_scene load_steps=53 format=3 uid="uid://cccedwdy5ljis"]
 
 [ext_resource type="Texture2D" uid="uid://bo8jdfspekdjj" path="res://assets/sprites/reimu.png" id="1_amfaw"]
 [ext_resource type="Script" path="res://scenes/gameplay/player.gd" id="1_s4psi"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cvfeyc1y2iepd" path="res://assets/sounds/2hu_p_shoot.wav" id="4_0xqlj"]
 [ext_resource type="Texture2D" uid="uid://610fg6jjl2u2" path="res://assets/sprites/PC Computer - Touhou Youyoumu Perfect Cherry Blossom - Characters.png" id="4_cvlly"]
 [ext_resource type="Script" path="res://scripts/simplerotate.gd" id="5_7c7v7"]
+[ext_resource type="AudioStream" uid="uid://m6oivs808ixt" path="res://assets/sounds/se_glass.ogg" id="5_ant18"]
 [ext_resource type="AudioStream" uid="uid://b56rk6sxstta3" path="res://assets/sounds/2hu_graze.wav" id="7_br8ib"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vpqa3"]
@@ -404,7 +405,7 @@ shooting_delay = 0.1
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qps5x")
 animation = &"idle"
-frame = 3
+frame = 2
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f3n5x")
@@ -419,6 +420,9 @@ texture = SubResource("AtlasTexture_5x8go")
 
 [node name="ShootPlayer" type="AudioStreamPlayer2D" parent="SFXPlayer"]
 stream = ExtResource("4_0xqlj")
+
+[node name="DeathPlayer" type="AudioStreamPlayer2D" parent="SFXPlayer"]
+stream = ExtResource("5_ant18")
 
 [node name="RightBall" type="Sprite2D" parent="."]
 position = Vector2(22, 0)

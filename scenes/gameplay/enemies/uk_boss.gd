@@ -9,7 +9,6 @@ var attacking = false
 @onready var hr_obj = preload("res://scenes/gameplay/enemies/hardrock.tscn")
 @onready var s_shoot_turtle = preload("res://assets/sounds/2hu_e_tan0.wav")
 @onready var s_shoot_bullet = preload("res://assets/sounds/2hu_e_tan1.wav")
-@onready var s_explode = preload("res://assets/sounds/bigboom.wav")
 @onready var swansong_obj = preload("res://scenes/gameplay/enemies/uk_swansong.tscn")
 @onready var shoot_player = $SFXPlayer/ShootPlayer as AudioStreamPlayer2D
 @onready var laser_player = $SFXPlayer/LaserPlayer as AudioStreamPlayer2D

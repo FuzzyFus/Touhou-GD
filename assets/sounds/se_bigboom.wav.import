@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://binlqapv2pl4m"
-path="res://.godot/imported/bigboom.wav-cb9d98dc038eb92fdb21836fa2be525e.sample"
+uid="uid://c6hgkylavapcn"
+path="res://.godot/imported/se_bigboom.wav-4b38b196352c3c9dccbafb7386ecdf32.sample"
 
 [deps]
 
-source_file="res://assets/sounds/bigboom.wav"
-dest_files=["res://.godot/imported/bigboom.wav-cb9d98dc038eb92fdb21836fa2be525e.sample"]
+source_file="res://assets/sounds/se_bigboom.wav"
+dest_files=["res://.godot/imported/se_bigboom.wav-4b38b196352c3c9dccbafb7386ecdf32.sample"]
 
 [params]
 

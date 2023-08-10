@@ -10,6 +10,8 @@ extends CharacterBody2D
 @export var lives = 1
 const SPEED := 250.0
 
+var dead = false
+
 @export var shooting_delay := 0.3
 var damage_delay := 3.0
 var can_shoot := true
@@ -28,22 +30,28 @@ var ball_t := 0.0
 # sound related
 @onready var sfx_player := $SFXPlayer as AudioStreamPlayer2D
 @onready var shoot_player := $SFXPlayer/ShootPlayer as AudioStreamPlayer2D
+@onready var death_player := $SFXPlayer/DeathPlayer as AudioStreamPlayer2D
 @onready var s_pickup := preload("res://assets/sounds/2hu_pickup.wav") as AudioStream
 @onready var s_powerup := preload("res://assets/sounds/2hu_powerup.wav") as AudioStream
 @onready var s_hit := preload("res://assets/sounds/2hu_p_death.wav") as AudioStream
 @onready var s_death := preload("res://assets/sounds/voc_aaaaa.mp3") as AudioStream
 @onready var s_oneup := preload("res://assets/sounds/se_bonus.wav") as AudioStream
 
+@onready var m_greyscale := preload("res://assets/shaders/greyscale.gdshader") as Shader
+
 # external assets
 var bullet := preload("res://scenes/gameplay/player_bullet.tscn")
 @onready var timer := $Timer as Timer
 
 func _physics_process(delta) -> void:
-	movement()
-	shooting()
-	move_balls(delta)
-	update_animtree()
-	
+	if lives > 0:
+		movement()
+		shooting()
+		move_balls(delta)
+		update_animtree()
+	if dead:
+		velocity.y += delta
+
 func shooting() -> void:
 	if can_shoot and Input.is_action_pressed("shoot"):
 		# spawn bullet(s)
@@ -122,8 +130,11 @@ func move_balls(delta) -> void:
 		$LeftBall.position = frontPos.lerp(sidePos, ball_t) * Vector2(-1,1)
 
 func hit() -> void:
-	if not invulnerable:
+	if not invulnerable and lives > 0:
 		lives -= 1
+		if lives <= 0:
+			die()
+			return
 		
 		damagetree["parameters/conditions/hit"] = true
 		sfx_player.stream = s_hit
@@ -153,7 +164,7 @@ func update_animtree() -> void:
 		sprite.flip_h = true 
 
 func check_graze(ev) -> void:
-	if ev.is_in_group("enemy_projectile") and invulnerable == false:
+	if ev.is_in_group("enemy_projectile") and invulnerable == false and lives > 0:
 		ev = ev.get_parent()
 		if ev.grazed == false:
 			ev.grazed = true
@@ -161,3 +172,34 @@ func check_graze(ev) -> void:
 			graze_emitter.emitting = true
 			$Graze/GrazePlayer.play()
 			score += 1
+
+func die() -> void:
+	if not dead:
+		# stop everything
+		$Hitbox.set_deferred("disabled", true)
+		
+		# TODO: GROSS CODE GROSS CODE NOOOOOOOOOOOOO I HATE THIS
+		var greyscale = ShaderMaterial.new()
+		greyscale.shader = m_greyscale
+		sprite.set_material(greyscale)
+		
+		death_player.play()
+		await(get_tree().create_timer(2).timeout)
+		
+		var dead = true
+		
+		# I ALSO HATE THIS CODE! GROSS! DISGUSTING! FILTHY! :((((((((((((((((((((((((((((
+		# makes a rigid body to make player spin
+		var rb = RigidBody2D.new()
+		get_parent().add_child(rb)
+		rb.global_position = self.global_position
+		get_parent().remove_child(self)
+		rb.add_child(self)
+		self.position = Vector2.ZERO
+		rb.inertia = 0.01
+		rb.gravity_scale = 0.3
+		rb.apply_central_impulse(Vector2(randf_range(-50,50),-200))
+		rb.apply_torque_impulse(0.2)
+		
+		death_player.stream = s_death
+		death_player.play()

@@ -1,7 +1,7 @@
 extends Enemy
 
 @onready var bullet_obj = preload("res://scenes/gameplay/enemies/enemy_bullet.tscn")
-@onready var s_explode = preload("res://assets/sounds/bigboom.wav")
+@onready var s_explode = preload("res://assets/sounds/se_bigboom.wav")
 
 @onready var shoot_player = $SFXPlayer/ShootPlayer as AudioStreamPlayer2D
 
