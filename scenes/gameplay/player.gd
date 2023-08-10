@@ -1,6 +1,5 @@
 # TODO: make this actually a class instead of just the player script that happens to be a class www
-# important for card collision n such
-# TODO: add graze
+# would be nice for multiplayer
 
 class_name Player
 extends CharacterBody2D

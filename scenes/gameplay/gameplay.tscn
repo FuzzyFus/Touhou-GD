@@ -1,11 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://boswif7tqqxag"]
+[gd_scene load_steps=17 format=3 uid="uid://boswif7tqqxag"]
 
+[ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="1_3x43e"]
 [ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
 [ext_resource type="Script" path="res://scenes/gameplay/projectile_barrier.gd" id="2_0wdu8"]
 [ext_resource type="Script" path="res://scenes/gameplay/float_area.gd" id="3_lyewm"]
 [ext_resource type="PackedScene" uid="uid://bhgccekvt1q3s" path="res://scenes/gameplay/card.tscn" id="3_vkgvg"]
 [ext_resource type="PackedScene" uid="uid://c1k2lmpwd62y2" path="res://scenes/gameplay/enemies/uk_boss.tscn" id="6_5nnax"]
-[ext_resource type="PackedScene" uid="uid://uhnxjo300qtt" path="res://scenes/gameplay/ui/ui.tscn" id="6_jqspk"]
+[ext_resource type="Script" path="res://scenes/gameplay/ui/ui.gd" id="6_rk23y"]
+[ext_resource type="Texture2D" uid="uid://d22fornt2ex0n" path="res://assets/sprites/PC Computer - Touhou Youyoumu Perfect Cherry Blossom - Stages Tiles & Backgrounds.png" id="7_clq6w"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib3x4"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x0o0l"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ljf0b"]
+normal = Vector2(-1, 0)
+distance = -156.0
 
 [sub_resource type="Gradient" id="Gradient_qk7k0"]
 offsets = PackedFloat32Array(0, 0.5, 1)
@@ -14,39 +25,62 @@ colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ixgck"]
 gradient = SubResource("Gradient_qk7k0")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib3x4"]
-normal = Vector2(0, 1)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x0o0l"]
-
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e386b"]
 normal = Vector2(1, 0)
 distance = -156.0
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ljf0b"]
-normal = Vector2(-1, 0)
-distance = -156.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tyep4"]
+texture = ExtResource("7_clq6w")
+
+[sub_resource type="LabelSettings" id="LabelSettings_d18ot"]
+font_size = 32
 
 [node name="Gameplay" type="Node2D"]
+script = ExtResource("1_3x43e")
 
 [node name="Player" parent="." instance=ExtResource("1_i33lo")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-205, -26)
-rotation = 1.5708
-scale = Vector2(150, 0.03)
-texture = SubResource("GradientTexture2D_ixgck")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(205, -26)
-rotation = 1.5708
-scale = Vector2(150, 0.03)
-texture = SubResource("GradientTexture2D_ixgck")
-
 [node name="Boundaries" type="Node2D" parent="."]
 
+[node name="World" type="Node2D" parent="Boundaries"]
+
+[node name="Vertical" type="StaticBody2D" parent="Boundaries/World" groups=["world_boundary"]]
+
+[node name="Top" type="CollisionShape2D" parent="Boundaries/World/Vertical"]
+position = Vector2(0, -290)
+shape = SubResource("WorldBoundaryShape2D_ib3x4")
+
+[node name="Bottom" type="CollisionShape2D" parent="Boundaries/World/Vertical"]
+position = Vector2(0, 290)
+shape = SubResource("WorldBoundaryShape2D_x0o0l")
+
+[node name="Right" type="StaticBody2D" parent="Boundaries/World" groups=["world_boundary"]]
+position = Vector2(100, 0)
+scale = Vector2(0.8, 0.8)
+
+[node name="Right" type="CollisionShape2D" parent="Boundaries/World/Right"]
+shape = SubResource("WorldBoundaryShape2D_ljf0b")
+
+[node name="Reference" type="Sprite2D" parent="Boundaries/World/Right"]
+position = Vector2(156, 0)
+rotation = 1.5708
+scale = Vector2(187.5, 0.0375)
+texture = SubResource("GradientTexture2D_ixgck")
+
+[node name="Left" type="StaticBody2D" parent="Boundaries/World" groups=["world_boundary"]]
+position = Vector2(-100, 0)
+scale = Vector2(0.8, 0.8)
+
+[node name="Left" type="CollisionShape2D" parent="Boundaries/World/Left"]
+shape = SubResource("WorldBoundaryShape2D_e386b")
+
+[node name="Reference" type="Sprite2D" parent="Boundaries/World/Left"]
+position = Vector2(-156, 0)
+rotation = 1.5708
+scale = Vector2(187.5, 0.0375)
+texture = SubResource("GradientTexture2D_ixgck")
+
 [node name="Projectiles" type="Area2D" parent="Boundaries"]
-scale = Vector2(0.98, 0.98)
 collision_layer = 14
 collision_mask = 14
 script = ExtResource("2_0wdu8")
@@ -68,42 +102,15 @@ position = Vector2(115, 0)
 shape = SubResource("WorldBoundaryShape2D_ljf0b")
 
 [node name="Float Area" type="Area2D" parent="Boundaries"]
+position = Vector2(0, -175)
 script = ExtResource("3_lyewm")
 
 [node name="Top" type="CollisionShape2D" parent="Boundaries/Float Area"]
-position = Vector2(0, -175)
 shape = SubResource("WorldBoundaryShape2D_ib3x4")
 
 [node name="Sprite2D" type="Sprite2D" parent="Boundaries/Float Area/Top"]
 scale = Vector2(7.5, 0.031)
 texture = SubResource("GradientTexture2D_ixgck")
-
-[node name="World" type="Node2D" parent="Boundaries"]
-
-[node name="Vertical" type="StaticBody2D" parent="Boundaries/World" groups=["world_boundary"]]
-scale = Vector2(0.8, 0.8)
-
-[node name="Top" type="CollisionShape2D" parent="Boundaries/World/Vertical"]
-position = Vector2(0, -324)
-shape = SubResource("WorldBoundaryShape2D_ib3x4")
-
-[node name="Bottom" type="CollisionShape2D" parent="Boundaries/World/Vertical"]
-position = Vector2(0, 324)
-shape = SubResource("WorldBoundaryShape2D_x0o0l")
-
-[node name="Right" type="StaticBody2D" parent="Boundaries/World" groups=["world_boundary"]]
-scale = Vector2(0.8, 0.8)
-
-[node name="Right" type="CollisionShape2D" parent="Boundaries/World/Right"]
-position = Vector2(100, 0)
-shape = SubResource("WorldBoundaryShape2D_ljf0b")
-
-[node name="Left" type="StaticBody2D" parent="Boundaries/World" groups=["world_boundary"]]
-scale = Vector2(0.8, 0.8)
-
-[node name="Left" type="CollisionShape2D" parent="Boundaries/World/Left"]
-position = Vector2(-100, 0)
-shape = SubResource("WorldBoundaryShape2D_e386b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
@@ -128,9 +135,118 @@ current_type = 0
 [node name="UKBoss" parent="." instance=ExtResource("6_5nnax")]
 position = Vector2(0, -177)
 
-[node name="UI" parent="." instance=ExtResource("6_jqspk")]
-custom_minimum_size = Vector2(922, 518)
+[node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(1024, 576)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_rk23y")
+
+[node name="left" type="Panel" parent="UI"]
+self_modulate = Color(0.65098, 0.65098, 0.65098, 1)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 288.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tyep4")
+
+[node name="right" type="Panel" parent="UI"]
+self_modulate = Color(0.65098, 0.65098, 0.65098, 1)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -288.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tyep4")
+
+[node name="Label" type="Label" parent="UI/right"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "abcd"
+
+[node name="BossUI" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -203.0
+offset_top = 7.0
+offset_right = 203.0
+offset_bottom = 47.0
+grow_horizontal = 2
+
+[node name="Name" type="Label" parent="UI/BossUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "United Kingdom"
+vertical_alignment = 1
+
+[node name="HealthCounter" type="Label" parent="UI/BossUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "1000/1000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TimerLabel" type="Label" parent="UI/BossUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -33.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "00:00:00"
+label_settings = SubResource("LabelSettings_d18ot")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ColorRect" parent="UI/BossUI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+color = Color(0.117647, 0.117647, 0.117647, 0.490196)
+
+[node name="Fill" type="ColorRect" parent="UI/BossUI/HealthBar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -203.0
+offset_right = 203.0
+offset_bottom = 16.0
+grow_horizontal = 2
+
+[node name="GameTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="area_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
 [connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
 [connection signal="body_entered" from="Boundaries/Float Area" to="Boundaries/Float Area" method="on_collision"]
+[connection signal="timeout" from="GameTimer" to="." method="timer_ended"]

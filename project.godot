@@ -17,11 +17,15 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://scenes/global.gd"
+Global="*res://scripts/global.gd"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/initial_position_type=4
 window/stretch/mode="viewport"
+window/vsync/vsync_mode=0
 
 [input]
 

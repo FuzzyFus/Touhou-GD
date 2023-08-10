@@ -1,4 +1,3 @@
-# TODO: fix colour
 extends RigidBody2D
 
 var grazed = false
@@ -36,7 +35,6 @@ func ini(new_speed : Vector2, colour : String = "default", new_gravity := 0.0):
 			_:
 				sprite.texture.set_region(Rect2(8,57,16,16))
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_d):
 	time += _d
 	linear_velocity = speed + (gravity * time)

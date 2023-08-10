@@ -159,3 +159,4 @@ func death() -> void:
 			x += 1
 	
 	queue_free()
+

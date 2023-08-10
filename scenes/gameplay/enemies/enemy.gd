@@ -8,6 +8,7 @@ var grazed = false
 @export var health : int = 9
 @onready var sfx_player := $SFXPlayer as AudioStreamPlayer2D
 
+# TODO: procs twice on ukboss? look at health values on turtle
 func hit() -> void:
 	sfx_player.play()
 	health -= 1
@@ -16,7 +17,7 @@ func hit() -> void:
 	pass
 
 func death() -> void:
-	#spawn cards based on input, with random velocity to make it "explode"
+	# spawn cards based on input, with random velocity to make it "explode"
 	
 	for card in drops["point_cards"]:
 		var instance = Global.scene_card.instantiate()
