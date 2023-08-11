@@ -19,8 +19,8 @@ func _process(_d):
 	data["TimeLeft"] = timer.time_left
 	if ukboss != null:
 		data["BossHealth"] = ukboss.health
-		
-	ui.update_ui(data)
+	
+	ui.update_ui(data, players)
 
 func timer_ended() -> void:
 	# kill players automatically

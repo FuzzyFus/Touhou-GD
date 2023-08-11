@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://boswif7tqqxag"]
+[gd_scene load_steps=20 format=3 uid="uid://boswif7tqqxag"]
 
 [ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="1_3x43e"]
 [ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c1k2lmpwd62y2" path="res://scenes/gameplay/enemies/uk_boss.tscn" id="6_5nnax"]
 [ext_resource type="Script" path="res://scenes/gameplay/ui/ui.gd" id="6_rk23y"]
 [ext_resource type="Texture2D" uid="uid://d22fornt2ex0n" path="res://assets/sprites/PC Computer - Touhou Youyoumu Perfect Cherry Blossom - Stages Tiles & Backgrounds.png" id="7_clq6w"]
+[ext_resource type="Texture2D" uid="uid://dsvwyrd53i6gj" path="res://assets/sprites/PC Computer - Touhou Youyoumu Perfect Cherry Blossom - Sidebar Load & Pause Screens.png" id="9_0ilp0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib3x4"]
 normal = Vector2(0, 1)
@@ -32,6 +33,13 @@ distance = -156.0
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tyep4"]
 texture = ExtResource("7_clq6w")
 
+[sub_resource type="LabelSettings" id="LabelSettings_kb221"]
+font_size = 23
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w75di"]
+atlas = ExtResource("9_0ilp0")
+region = Rect2(0, 0, 14, 13)
+
 [sub_resource type="LabelSettings" id="LabelSettings_d18ot"]
 font_size = 32
 
@@ -39,6 +47,7 @@ font_size = 32
 script = ExtResource("1_3x43e")
 
 [node name="Player" parent="." instance=ExtResource("1_i33lo")]
+lives = 3
 
 [node name="Boundaries" type="Node2D" parent="."]
 
@@ -166,13 +175,73 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_tyep4")
 
-[node name="Label" type="Label" parent="UI/right"]
+[node name="Players" type="VBoxContainer" parent="UI/right"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 26.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 30.0
+offset_right = -13.0
+offset_bottom = -30.0
 grow_horizontal = 2
-text = "abcd"
+grow_vertical = 2
+
+[node name="Player1" type="VBoxContainer" parent="UI/right/Players"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="Score" type="Label" parent="UI/right/Players/Player1"]
+layout_mode = 2
+text = "Score 000000000"
+label_settings = SubResource("LabelSettings_kb221")
+vertical_alignment = 1
+
+[node name="Lives" type="HBoxContainer" parent="UI/right/Players/Player1"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Text" type="Label" parent="UI/right/Players/Player1/Lives"]
+layout_mode = 2
+text = "Lives "
+label_settings = SubResource("LabelSettings_kb221")
+vertical_alignment = 1
+
+[node name="Stock" type="TextureRect" parent="UI/right/Players/Player1/Lives"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_w75di")
+stretch_mode = 5
+
+[node name="Stock2" type="TextureRect" parent="UI/right/Players/Player1/Lives"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_w75di")
+stretch_mode = 5
+
+[node name="Stock3" type="TextureRect" parent="UI/right/Players/Player1/Lives"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_w75di")
+stretch_mode = 5
+
+[node name="Stock4" type="TextureRect" parent="UI/right/Players/Player1/Lives"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_w75di")
+stretch_mode = 5
+
+[node name="Stock5" type="TextureRect" parent="UI/right/Players/Player1/Lives"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_w75di")
+stretch_mode = 5
+
+[node name="Power" type="Label" parent="UI/right/Players/Player1"]
+layout_mode = 2
+text = "Power 0/50"
+label_settings = SubResource("LabelSettings_kb221")
+vertical_alignment = 1
 
 [node name="BossUI" type="Control" parent="UI"]
 layout_mode = 1
