@@ -134,9 +134,6 @@ func laser() -> void:
 
 func on_collision(ev) -> void:
 	if health > 0:
-		if ev.is_in_group("player_projectile"):
-			hit()
-		
 		# ran into the player
 		if ev.is_in_group("player"):
 			var player = ev as Player

@@ -20,7 +20,7 @@ drops = {
 "point_cards": 2,
 "power_cards": 1
 }
-health = 6
+health = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)

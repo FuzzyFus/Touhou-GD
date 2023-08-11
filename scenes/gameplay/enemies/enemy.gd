@@ -37,12 +37,8 @@ func death() -> void:
 	queue_free()
 
 func on_collision(ev) -> void:
-	if ev.is_in_group("player_projectile"):
-		hit()
-	
 	# ran into the player
 	if ev.is_in_group("player"):
 		var player = ev as Player
 		if not player.invulnerable:
 			player.hit()
-			queue_free()

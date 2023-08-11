@@ -184,7 +184,7 @@ func die() -> void:
 		sprite.set_material(greyscale)
 		
 		death_player.play()
-		await(get_tree().create_timer(2).timeout)
+		await(get_tree().create_timer(1).timeout)
 		
 		var dead = true
 		
