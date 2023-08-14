@@ -2,7 +2,7 @@ extends Enemy
 
 enum atk_type {NONE, TURTLE1, TURTLE2, SPIN1, CONE, LASER, HR}
 var last_attacks = []
-var attacking = false
+var attacking = true
 
 @onready var turtle_obj = preload("res://scenes/gameplay/enemies/turtle.tscn")
 @onready var bullet_obj = preload("res://scenes/gameplay/enemies/enemy_bullet.tscn")
@@ -156,3 +156,6 @@ func death() -> void:
 	
 	queue_free()
 
+# attacking also doubles as it being active in general, so its used on start_game
+func toggle_attacking() -> void:
+	attacking = not attacking

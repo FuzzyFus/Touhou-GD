@@ -1,14 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://boswif7tqqxag"]
+[gd_scene load_steps=25 format=3 uid="uid://boswif7tqqxag"]
 
 [ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="1_3x43e"]
 [ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
 [ext_resource type="Script" path="res://scenes/gameplay/projectile_barrier.gd" id="2_0wdu8"]
 [ext_resource type="Script" path="res://scenes/gameplay/float_area.gd" id="3_lyewm"]
-[ext_resource type="PackedScene" uid="uid://bhgccekvt1q3s" path="res://scenes/gameplay/card.tscn" id="3_vkgvg"]
 [ext_resource type="PackedScene" uid="uid://c1k2lmpwd62y2" path="res://scenes/gameplay/enemies/uk_boss.tscn" id="6_5nnax"]
 [ext_resource type="Script" path="res://scenes/gameplay/ui/ui.gd" id="6_rk23y"]
 [ext_resource type="Texture2D" uid="uid://d22fornt2ex0n" path="res://assets/sprites/PC Computer - Touhou Youyoumu Perfect Cherry Blossom - Stages Tiles & Backgrounds.png" id="7_clq6w"]
 [ext_resource type="Texture2D" uid="uid://dsvwyrd53i6gj" path="res://assets/sprites/PC Computer - Touhou Youyoumu Perfect Cherry Blossom - Sidebar Load & Pause Screens.png" id="9_0ilp0"]
+[ext_resource type="Script" path="res://scenes/gameplay/ui/cutscene.gd" id="9_vo58h"]
+[ext_resource type="Texture2D" uid="uid://dcaehmc3sk2xp" path="res://assets/sprites/GB.png" id="10_bxdoc"]
+[ext_resource type="Texture2D" uid="uid://nq5c4y2vqbft" path="res://assets/sprites/reimu_portrait.png" id="10_y7cpk"]
+[ext_resource type="AudioStream" uid="uid://dh32yadgyb2cu" path="res://assets/sounds/uk1.mp3" id="12_hh3ox"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib3x4"]
 normal = Vector2(0, 1)
@@ -43,6 +46,17 @@ region = Rect2(0, 0, 14, 13)
 [sub_resource type="LabelSettings" id="LabelSettings_d18ot"]
 font_size = 32
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mg3x"]
+atlas = ExtResource("10_y7cpk")
+region = Rect2(0, 0, 128, 512)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dwwsp"]
+bg_color = Color(0, 0, 0, 0.705882)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_3x43e")
 
@@ -71,6 +85,7 @@ scale = Vector2(0.8, 0.8)
 shape = SubResource("WorldBoundaryShape2D_ljf0b")
 
 [node name="Reference" type="Sprite2D" parent="Boundaries/World/Right"]
+visible = false
 position = Vector2(156, 0)
 rotation = 1.5708
 scale = Vector2(187.5, 0.0375)
@@ -84,6 +99,7 @@ scale = Vector2(0.8, 0.8)
 shape = SubResource("WorldBoundaryShape2D_e386b")
 
 [node name="Reference" type="Sprite2D" parent="Boundaries/World/Left"]
+visible = false
 position = Vector2(-156, 0)
 rotation = 1.5708
 scale = Vector2(187.5, 0.0375)
@@ -123,23 +139,6 @@ texture = SubResource("GradientTexture2D_ixgck")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
-
-[node name="dev_cards" type="Node2D" parent="."]
-
-[node name="card4" parent="dev_cards" instance=ExtResource("3_vkgvg")]
-position = Vector2(202, -102)
-
-[node name="card3" parent="dev_cards" instance=ExtResource("3_vkgvg")]
-position = Vector2(166, -131)
-current_type = 2
-
-[node name="card2" parent="dev_cards" instance=ExtResource("3_vkgvg")]
-position = Vector2(167, -69)
-current_type = 1
-
-[node name="card" parent="dev_cards" instance=ExtResource("3_vkgvg")]
-position = Vector2(115, -76)
-current_type = 0
 
 [node name="UKBoss" parent="." instance=ExtResource("6_5nnax")]
 position = Vector2(0, -177)
@@ -311,6 +310,78 @@ offset_left = -203.0
 offset_right = 203.0
 offset_bottom = 16.0
 grow_horizontal = 2
+
+[node name="CutsceneUI" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -224.0
+offset_right = 224.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_vo58h")
+
+[node name="Potraits" type="Control" parent="UI/CutsceneUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Left" type="TextureRect" parent="UI/CutsceneUI/Potraits"]
+layout_mode = 2
+offset_right = 161.0
+offset_bottom = 644.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_8mg3x")
+stretch_mode = 5
+
+[node name="Right" type="TextureRect" parent="UI/CutsceneUI/Potraits"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = 37.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("10_bxdoc")
+
+[node name="Panel" type="Panel" parent="UI/CutsceneUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -130.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dwwsp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/CutsceneUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 10.0
+offset_right = -8.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=20][color=9999ff]Hey, UK captain? Our team needs to reschedule our match."
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/CutsceneUI"]
+stream = ExtResource("12_hh3ox")
 
 [node name="GameTimer" type="Timer" parent="."]
 one_shot = true

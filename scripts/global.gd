@@ -13,3 +13,9 @@ func format_time(time) -> String:
 	var mil : int = fmod((time * 1000), 1000) / 10
 	var str := "%02d:%02d.%02d" % [min, sec, mil]
 	return str
+
+# this should probably use an await??
+func load_file(directory):
+	var file = FileAccess.open("user://save_game.dat", FileAccess.READ)
+	var content = file.get_as_text()
+	return content

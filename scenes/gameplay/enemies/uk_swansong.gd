@@ -13,6 +13,7 @@ func shoot_bullet(spawn_location, direction: float, speed: float, colour := "red
 
 func _ready() -> void:
 	# take turns between bullet speeds, getting faster
+	# timer here to make sure theres no weirdness while it instantiates
 	await(get_tree().create_timer(0.1).timeout)
 
 	for i in 12:

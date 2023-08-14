@@ -17,6 +17,7 @@ var damage_delay := 3.0
 var can_shoot := true
 @export var invulnerable := false
 var slow := false
+var active := false
 
 # TODO: this is stupid. i should probably make a new script for this but im stubborn
 var ball_t := 0.0
@@ -43,8 +44,10 @@ var ball_t := 0.0
 var bullet := preload("res://scenes/gameplay/player_bullet.tscn")
 @onready var timer := $Timer as Timer
 
+signal shoot_pressed
+
 func _physics_process(delta) -> void:
-	if lives > 0:
+	if lives > 0 and active:
 		movement()
 		shooting()
 		move_balls(delta)
@@ -148,6 +151,9 @@ func _input(ev) -> void:
 		elif ev.is_action_released("slow"):
 			ball_t = 0
 			slow = false
+		
+		if ev.is_action_pressed("shoot"):
+			shoot_pressed.emit()
 
 func update_animtree() -> void:
 	var pressing = Input.is_action_pressed("left") or Input.is_action_pressed("right")
@@ -203,3 +209,6 @@ func die() -> void:
 		
 		death_player.stream = s_death
 		death_player.play()
+
+func toggle_active() -> void:
+	active = not active
