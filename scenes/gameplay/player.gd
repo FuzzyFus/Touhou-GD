@@ -45,6 +45,7 @@ var bullet := preload("res://scenes/gameplay/player_bullet.tscn")
 @onready var timer := $Timer as Timer
 
 signal shoot_pressed
+signal slow_pressed
 
 func _physics_process(delta) -> void:
 	if lives > 0 and active:
@@ -154,6 +155,8 @@ func _input(ev) -> void:
 		
 		if ev.is_action_pressed("shoot"):
 			shoot_pressed.emit()
+		if ev.is_action_pressed("slow"):
+			slow_pressed.emit()
 
 func update_animtree() -> void:
 	var pressing = Input.is_action_pressed("left") or Input.is_action_pressed("right")

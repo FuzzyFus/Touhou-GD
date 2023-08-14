@@ -8,8 +8,10 @@ var start_time : int
 var players : Array
 
 @onready var cutscene := $UI/CutsceneUI
+var game_started := false
 
 signal accept_menu
+signal skip_menu
 signal start_game
 
 func _ready():
@@ -20,7 +22,9 @@ func _ready():
 	players = get_tree().get_nodes_in_group("player")
 	for player in players:
 		player.shoot_pressed.connect(accept_menu_func)
+		player.slow_pressed.connect(skip_menu_func)
 		#timer.timeout.connect(player.die)
+		
 		start_game.connect(player.toggle_active)
 
 func _process(_d):
@@ -37,5 +41,10 @@ func timer_start() -> void:
 	timer.start(5) # 5 minutes
 
 func accept_menu_func() -> void:
-	accept_menu.emit()
+	if not game_started:
+		cutscene.advance_cutscene()
+	
+func skip_menu_func() -> void:
+	if not game_started:
+		cutscene.end_cutscene()
 
