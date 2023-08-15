@@ -23,7 +23,7 @@ func _ready():
 	for player in players:
 		player.shoot_pressed.connect(accept_menu_func)
 		player.slow_pressed.connect(skip_menu_func)
-		#timer.timeout.connect(player.die)
+		timer.timeout.connect(player.die)
 		
 		start_game.connect(player.toggle_active)
 
@@ -38,7 +38,7 @@ func _process(_d):
 	ui.update_ui(data, players)
 
 func timer_start() -> void:
-	timer.start(5) # 5 minutes
+	timer.start(300) # 5 minutes
 
 func accept_menu_func() -> void:
 	if not game_started:

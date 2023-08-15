@@ -57,7 +57,7 @@ func _physics_process(delta) -> void:
 		velocity.y += delta
 
 func shooting() -> void:
-	if can_shoot and Input.is_action_pressed("shoot"):
+	if can_shoot and not invulnerable and Input.is_action_pressed("shoot"):
 		# spawn bullet(s)
 		# TODO: this code looks bad and i should feel bad! make it iterate?
 		match floor(power / 25):

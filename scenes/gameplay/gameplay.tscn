@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://boswif7tqqxag"]
+[gd_scene load_steps=26 format=3 uid="uid://boswif7tqqxag"]
 
 [ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="1_3x43e"]
 [ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
@@ -56,6 +56,12 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_4qc4o"]
+line_spacing = 1.0
+font_size = 13
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_3x43e")
@@ -379,6 +385,22 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 text = "[font_size=20][color=9999ff]Hey, UK captain? Our team needs to reschedule our match."
+
+[node name="Label" type="Label" parent="UI/CutsceneUI/Panel"]
+self_modulate = Color(1, 1, 1, 0.419608)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -41.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Shoot: Next
+Slow: Skip"
+label_settings = SubResource("LabelSettings_4qc4o")
+horizontal_alignment = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/CutsceneUI"]
 stream = ExtResource("12_hh3ox")
