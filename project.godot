@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="touhou"
+config/name="Really Cool Touhou Godot Game"
 run/main_scene="res://scenes/root.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://assets/sprites/2hu.png"

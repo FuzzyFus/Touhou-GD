@@ -79,8 +79,8 @@ offset_top = 25.0
 offset_right = 834.0
 offset_bottom = 163.0
 grow_horizontal = 2
-text = "really cool touhou
-godot game"
+text = "Really Cool 
+Touhou Godot Game"
 label_settings = SubResource("LabelSettings_q423j")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -219,6 +219,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = -26.0
+offset_bottom = 23.0
 grow_horizontal = 2
 text = "Move"
 horizontal_alignment = 1
