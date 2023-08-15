@@ -50,4 +50,6 @@ func _ready() -> void:
 		var instance = Global.scene_card.instantiate()
 		get_parent().add_child(instance)
 		instance.ini(self.global_position, 3, card_spread)
+	
+	get_parent().boss_killed()
 	queue_free()

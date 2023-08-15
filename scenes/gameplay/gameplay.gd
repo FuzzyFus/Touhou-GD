@@ -4,9 +4,11 @@ extends Node2D
 var start_time : int
 @onready var timer = $GameTimer as Timer
 @onready var ui = $UI as Control
+@onready var end_menu = $UI/EndMenu as Control
 @onready var ukboss := $UKBoss as Enemy
 var players : Array
 var dead_players := 0
+var root
 
 @onready var cutscene := $UI/CutsceneUI
 var game_started := false
@@ -16,6 +18,8 @@ signal skip_menu
 signal start_game
 
 func _ready():
+	root = $".."
+	print(root)
 	ui.ini(ukboss.health)
 	
 	start_game.connect(ukboss.toggle_attacking)
@@ -31,6 +35,9 @@ func _ready():
 	
 	await(get_tree().create_timer(2).timeout)
 	cutscene.start_cutscene()
+	
+	$UI/EndMenu/Buttons/RetryButton.pressed.connect(root.reload_game)
+	$UI/EndMenu/Buttons/MenuButton.pressed.connect(root.stop_game)
 
 func _process(_d):
 	# send data to ui script
@@ -59,3 +66,20 @@ func player_died() -> void:
 		
 		print("all players died")
 		await(get_tree().create_timer(2).timeout)
+		open_end_menu()
+
+func open_end_menu() -> void:
+	end_menu.show()
+	if dead_players >= players.size(): # if lost...
+		end_menu.get_node("Label").text = "ya dun goof'd"
+
+func boss_killed() -> void:
+	# give player some time to grab all the cards n stuff for their final score
+	timer.paused = true
+	await(get_tree().create_timer(5).timeout)
+	
+	# give players extra score for the leftover time
+	for player in players:
+		player.score += floor(timer.time_left)
+	
+	open_end_menu()
