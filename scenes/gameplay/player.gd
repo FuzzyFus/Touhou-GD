@@ -46,6 +46,7 @@ var bullet := preload("res://scenes/gameplay/player_bullet.tscn")
 
 signal shoot_pressed
 signal slow_pressed
+signal player_died
 
 func _physics_process(delta) -> void:
 	if lives > 0 and active:
@@ -184,6 +185,7 @@ func check_graze(ev) -> void:
 
 func die() -> void:
 	if not dead:
+		player_died.emit()
 		# stop everything
 		$Hitbox.set_deferred("disabled", true)
 		

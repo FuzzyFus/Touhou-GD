@@ -1,0 +1,361 @@
+[gd_scene load_steps=9 format=3 uid="uid://bh8k3yjllh2jg"]
+
+[ext_resource type="Texture2D" uid="uid://b1c6g84tl78wt" path="res://assets/sprites/touhouawesome.jpg" id="1_43gvk"]
+[ext_resource type="Script" path="res://scenes/root.gd" id="1_kw56u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q423j"]
+line_spacing = 0.0
+font_size = 50
+outline_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_eybml"]
+line_spacing = 0.0
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inuw0"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.360784, 0.360784, 0.360784, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_n6g5q"]
+font_size = 26
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmhc4"]
+bg_color = Color(0.188235, 0.188235, 0.188235, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgi1j"]
+bg_color = Color(0.341176, 0.341176, 0.341176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="root" type="Node2D"]
+script = ExtResource("1_kw56u")
+
+[node name="Menus" type="Control" parent="."]
+custom_minimum_size = Vector2(1024, 576)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Main" type="Control" parent="Menus"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Menus/Main"]
+self_modulate = Color(0.301961, 0.301961, 0.301961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_43gvk")
+
+[node name="Title" type="Label" parent="Menus/Main"]
+layout_mode = 2
+offset_left = 190.0
+offset_top = 25.0
+offset_right = 834.0
+offset_bottom = 163.0
+grow_horizontal = 2
+text = "really cool touhou
+godot game"
+label_settings = SubResource("LabelSettings_q423j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Explanation" type="Label" parent="Menus/Main"]
+layout_mode = 2
+offset_left = 116.0
+offset_top = 164.0
+offset_right = 908.0
+offset_bottom = 288.0
+grow_horizontal = 2
+text = "Your osu!Taiko tournament matches are finally coming up, with your first match being against the UK. However, one of your team members had their computer give up. You should probably go talk to the UK captain to reschedule...?"
+label_settings = SubResource("LabelSettings_eybml")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Keys" type="Control" parent="Menus/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 102.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.3, 1.3)
+
+[node name="ShiftKey" type="Panel" parent="Menus/Main/Keys"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.487
+offset_top = -20.0
+offset_right = -39.4872
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_inuw0")
+
+[node name="Label" type="Label" parent="Menus/Main/Keys/ShiftKey"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Shift"
+label_settings = SubResource("LabelSettings_n6g5q")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Action" type="Label" parent="Menus/Main/Keys/ShiftKey"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = -26.0
+offset_right = 40.0
+grow_horizontal = 2
+text = "Slowdown"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShootKey" type="Panel" parent="Menus/Main/Keys"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_inuw0")
+
+[node name="Label" type="Label" parent="Menus/Main/Keys/ShootKey"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Z"
+label_settings = SubResource("LabelSettings_n6g5q")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Action" type="Label" parent="Menus/Main/Keys/ShootKey"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = -26.0
+offset_right = 40.0
+grow_horizontal = 2
+text = "Slowdown"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MovementKeys" type="Control" parent="Menus/Main/Keys"]
+custom_minimum_size = Vector2(124, 82)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 40.1538
+offset_top = -62.3333
+offset_right = 164.154
+offset_bottom = 19.6667
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="Action" type="Label" parent="Menus/Main/Keys/MovementKeys"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -26.0
+grow_horizontal = 2
+text = "Move"
+horizontal_alignment = 1
+
+[node name="Up" type="Panel" parent="Menus/Main/Keys/MovementKeys"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_inuw0")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Menus/Main/Keys/MovementKeys/Up"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+text = "V"
+label_settings = SubResource("LabelSettings_n6g5q")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Down" type="Panel" parent="Menus/Main/Keys/MovementKeys"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_inuw0")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Menus/Main/Keys/MovementKeys/Down"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "V"
+label_settings = SubResource("LabelSettings_n6g5q")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Left" type="Panel" parent="Menus/Main/Keys/MovementKeys"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_inuw0")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Menus/Main/Keys/MovementKeys/Left"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5708
+text = "V"
+label_settings = SubResource("LabelSettings_n6g5q")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Right" type="Panel" parent="Menus/Main/Keys/MovementKeys"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_inuw0")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Menus/Main/Keys/MovementKeys/Right"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+text = "V"
+label_settings = SubResource("LabelSettings_n6g5q")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Button" type="Button" parent="Menus/Main"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+offset_left = 413.0
+offset_top = 457.0
+offset_right = 611.0
+offset_bottom = 510.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_pmhc4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dgi1j")
+text = "stort"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.25, 1.25)
+
+[connection signal="pressed" from="Menus/Main/Button" to="." method="start_game"]

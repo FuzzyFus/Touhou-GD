@@ -143,9 +143,6 @@ shape = SubResource("WorldBoundaryShape2D_ib3x4")
 scale = Vector2(7.5, 0.031)
 texture = SubResource("GradientTexture2D_ixgck")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.25, 1.25)
-
 [node name="UKBoss" parent="." instance=ExtResource("6_5nnax")]
 position = Vector2(0, -177)
 
@@ -318,6 +315,7 @@ offset_bottom = 16.0
 grow_horizontal = 2
 
 [node name="CutsceneUI" type="Control" parent="UI"]
+visible = false
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5

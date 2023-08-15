@@ -6,6 +6,7 @@ var start_time : int
 @onready var ui = $UI as Control
 @onready var ukboss := $UKBoss as Enemy
 var players : Array
+var dead_players := 0
 
 @onready var cutscene := $UI/CutsceneUI
 var game_started := false
@@ -23,9 +24,13 @@ func _ready():
 	for player in players:
 		player.shoot_pressed.connect(accept_menu_func)
 		player.slow_pressed.connect(skip_menu_func)
+		player.player_died.connect(player_died)
 		timer.timeout.connect(player.die)
 		
 		start_game.connect(player.toggle_active)
+	
+	await(get_tree().create_timer(2).timeout)
+	cutscene.start_cutscene()
 
 func _process(_d):
 	# send data to ui script
@@ -48,3 +53,9 @@ func skip_menu_func() -> void:
 	if not game_started:
 		cutscene.end_cutscene()
 
+func player_died() -> void:
+	dead_players += 1
+	if dead_players >= players.size():
+		
+		print("all players died")
+		await(get_tree().create_timer(2).timeout)

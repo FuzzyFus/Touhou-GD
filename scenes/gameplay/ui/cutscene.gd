@@ -8,7 +8,7 @@ var reimu_colour := "9999ff"
 var uk_colour := "ff9999"
 @onready var audio = $AudioStreamPlayer as AudioStreamPlayer
 var s_uk2 = preload("res://assets/sounds/uk2.mp3")
-var cur_scene := 0
+var cur_scene := -1
 var can_skip := true
 
 @onready var reimu_portrait = $Potraits/Left as TextureRect
@@ -69,6 +69,10 @@ func end_cutscene() -> void:
 	$"../..".start_game.emit()
 	$"../..".timer_start()
 	$"../..".game_started = false
+
+func start_cutscene() -> void:
+	self.show()
+	cur_scene = 0
 
 func change_text(text := "", colour := "ffffff") -> void:
 	var new_text := "[font_size=20]"

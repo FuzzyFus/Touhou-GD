@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="touhou"
-run/main_scene="res://scenes/gameplay/gameplay.tscn"
+run/main_scene="res://scenes/root.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://assets/sprites/2hu.png"
 
