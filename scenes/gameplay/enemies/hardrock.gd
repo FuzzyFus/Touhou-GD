@@ -46,7 +46,7 @@ func explode():
 		# direction is the opposite way the HR is moving with 90 degrees of added randomness
 		shoot_bullet(self.global_position, rotation_degrees - 180 + randf_range(-25,25), randf_range(50,200))
 	
-	Global.expiring_audio.instantiate().ini(get_parent(), s_boom, self.global_position)
+	Global.expiring_audio.instantiate().ini(get_parent(), s_boom, "Enemy", self.global_position)
 	queue_free()
 
 func shoot_bullet(spawn_location: Vector2, direction: float, speed: float):

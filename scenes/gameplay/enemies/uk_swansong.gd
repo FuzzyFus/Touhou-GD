@@ -32,7 +32,7 @@ func _ready() -> void:
 	await(get_tree().create_timer(1).timeout)
 	sfx_player.queue_free()
 	
-	Global.expiring_audio.instantiate().ini(get_parent(), s_explode, self.global_position)
+	Global.expiring_audio.instantiate().ini(get_parent(), s_explode, "Enemy", self.global_position)
 	for i in 150:
 		shoot_bullet(global_position, randf_range(0,360), randf_range(100,250), "orange")
 
