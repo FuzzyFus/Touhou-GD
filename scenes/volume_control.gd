@@ -2,9 +2,12 @@ extends ColorRect
 
 @onready var vol_section := [$Bars/Master, $Bars/Spesifics/Player, $Bars/Spesifics/Enemy]
 @onready var change_sound := $Audio as AudioStreamPlayer
+@onready var timer := $Timeout as Timer
+@onready var timeout_bar := $TimeoutBar as TextureProgressBar
+var mouse_inside := false
 var cur_bus := 0
-var bar_tween : Tween
-var colour_tween : Tween
+var timeout_tween : Tween
+var visible_tween : Tween
 
 func _ready():
 	# make sure all busses are at their correct values
@@ -20,14 +23,18 @@ func _input(ev) -> void:
 	
 	if Input.is_action_pressed("vol_up"):
 		change_vol(change_amount)
+		if not mouse_inside:
+			change_focus()
 	
 	elif Input.is_action_pressed("vol_down"):
 		change_vol(change_amount * -1)
+		if not mouse_inside:
+			change_focus()
 
 func update_bar(idx) -> void:
 	# tween the bar value to make it smoothly jump to the value
 	var bar := vol_section[idx].get_node("TextureProgressBar") as TextureProgressBar
-	smart_tween(bar, "value", db_to_linear(AudioServer.get_bus_volume_db(idx)))
+	smart_tween(bar, "value", db_to_linear(AudioServer.get_bus_volume_db(idx)), 0.2)
 	
 	# change percentage text
 	vol_section[idx].get_node("Percentage").text = str( round(db_to_linear(AudioServer.get_bus_volume_db(idx)) * 100) )
@@ -52,15 +59,50 @@ func change_cur_bus(idx := 0) -> void:
 	var i := 0
 	for section in vol_section:
 		if idx == i:
-			smart_tween(section, "modulate", Color(1,1,1,1))
+			smart_tween(section, "modulate", Color(1,1,1,1), 0.2)
 		else:
-			smart_tween(section, "modulate", Color(1,1,1,0.5))
+			smart_tween(section, "modulate", Color(1,1,1,0.5), 0.2)
 		i += 1
 
-# automatically disposing tween, because godot doesnt like chaining things without delay :^(
-func smart_tween(object, property, final_val) -> void:
-	# all smart tweens are gonna use this cuz its nice n snappy
+func change_focus(new_mouse_inside := false) -> void:
+	mouse_inside = new_mouse_inside
+	change_visibility(true)
+	if mouse_inside: # volume is moused over
+		timer.stop()
+		
+		if timeout_tween:
+			timeout_tween.kill()
+		timeout_tween = create_tween().set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+		timeout_tween.tween_property(timeout_bar, "value", 1, 0.2)
+		return
+	
+	# timeout for disappearing
+	timer.start()
+	timeout_bar.value = 1
+	
+	if timeout_tween:
+		timeout_tween.kill()
+	timeout_tween = create_tween()
+	timeout_tween.tween_property(timeout_bar, "value", 0, timer.wait_time)
+
+func change_visibility(visible : bool) -> void:
+	var new_colour : Color
+	new_colour = Color.WHITE if visible else Color(1,1,1,0)
+	
+	if visible_tween:
+		visible_tween.kill()
+	visible_tween = create_tween().set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	visible_tween.tween_property(self, "modulate", new_colour, 0.2)
+	
+	# change cur_bus to master if left to go invisible
+	if not visible:
+		change_cur_bus(0)
+
+# automatically disposing tween, works best if same duration so it writes over possible dupiclates
+# shorthand way so i dont have to write a novel to make a single tween www
+func smart_tween(object, property: String, final_val, duration: float) -> void:
+	# transitions make it nice n snappy :^D
 	var tween = create_tween().set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-	tween.tween_property(object, property, final_val, 0.2)
+	tween.tween_property(object, property, final_val, duration)
 	await tween.finished
 	tween.kill()

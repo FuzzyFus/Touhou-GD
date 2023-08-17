@@ -21,7 +21,7 @@ font_size = 18
 outline_size = 1
 
 [node name="Volume" type="ColorRect"]
-z_index = 5
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -154,11 +154,37 @@ text = "MASTER"
 label_settings = SubResource("LabelSettings_oved7")
 horizontal_alignment = 1
 
+[node name="TimeoutBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture1D_8lnya")
+texture_progress = SubResource("GradientTexture1D_2u8gf")
+tint_under = Color(0.0352941, 0.0352941, 0.0352941, 0.490196)
+tint_progress = Color(0, 0.505882, 1, 1)
+
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_slbvg")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timeout" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
 
+[connection signal="mouse_entered" from="." to="." method="change_focus" binds= [true]]
+[connection signal="mouse_exited" from="." to="." method="change_focus" binds= [false]]
 [connection signal="mouse_entered" from="Bars/Spesifics/Player" to="." method="change_cur_bus" binds= [1]]
 [connection signal="mouse_entered" from="Bars/Spesifics/Enemy" to="." method="change_cur_bus" binds= [2]]
 [connection signal="mouse_entered" from="Bars/Master" to="." method="change_cur_bus"]
+[connection signal="timeout" from="Timeout" to="." method="change_visibility" binds= [false]]
