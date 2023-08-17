@@ -151,6 +151,9 @@ texture = SubResource("GradientTexture2D_ixgck")
 [node name="UKBoss" parent="." instance=ExtResource("6_5nnax")]
 position = Vector2(0, -177)
 
+[node name="GameTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="UI" type="Control" parent="."]
 z_index = 1
 custom_minimum_size = Vector2(1024, 576)
@@ -158,8 +161,13 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -512.0
+offset_top = -288.0
+offset_right = 512.0
+offset_bottom = 288.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("6_rk23y")
 
 [node name="left" type="Panel" parent="UI"]
@@ -169,6 +177,7 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 288.0
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_tyep4")
 
 [node name="right" type="Panel" parent="UI"]
@@ -181,6 +190,7 @@ anchor_bottom = 1.0
 offset_left = -288.0
 grow_horizontal = 0
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_tyep4")
 
 [node name="Players" type="VBoxContainer" parent="UI/right"]
@@ -261,6 +271,7 @@ offset_top = 7.0
 offset_right = 203.0
 offset_bottom = 47.0
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="Name" type="Label" parent="UI/BossUI"]
 layout_mode = 1
@@ -331,6 +342,7 @@ offset_left = -224.0
 offset_right = 224.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("9_vo58h")
 
 [node name="Potraits" type="Control" parent="UI/CutsceneUI"]
@@ -425,6 +437,7 @@ offset_left = -219.0
 offset_right = 224.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="UI/EndMenu"]
@@ -436,6 +449,7 @@ horizontal_alignment = 1
 [node name="Buttons" type="Control" parent="UI/EndMenu"]
 custom_minimum_size = Vector2(0, 104)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="RetryButton" type="Button" parent="UI/EndMenu/Buttons"]
 layout_mode = 2
@@ -454,9 +468,6 @@ offset_right = 319.0
 offset_bottom = 100.0
 theme_override_font_sizes/font_size = 24
 text = "Menu"
-
-[node name="GameTimer" type="Timer" parent="."]
-one_shot = true
 
 [connection signal="area_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
 [connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]

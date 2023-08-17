@@ -21,7 +21,6 @@ font_size = 18
 outline_size = 1
 
 [node name="Volume" type="ColorRect"]
-modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

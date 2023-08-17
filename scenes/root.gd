@@ -11,6 +11,8 @@ func _process(_d) -> void:
 func start_game() -> void:
 	gameplay = gameplay_obj.instantiate()
 	add_child(gameplay)
+	# move gameplay to ensure ui input works as intended
+	move_child(gameplay, 1)
 	main_menu.hide()
 
 func stop_game() -> void:

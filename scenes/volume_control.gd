@@ -10,6 +10,9 @@ var timeout_tween : Tween
 var visible_tween : Tween
 
 func _ready():
+	# start invisible
+	modulate = Color(1,1,1,0)
+	
 	# make sure all busses are at their correct values
 	var i := 0
 	for bus in vol_section:
