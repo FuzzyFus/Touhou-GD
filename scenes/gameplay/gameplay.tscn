@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://boswif7tqqxag"]
+[gd_scene load_steps=28 format=3 uid="uid://boswif7tqqxag"]
 
 [ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="1_3x43e"]
 [ext_resource type="PackedScene" uid="uid://cccedwdy5ljis" path="res://scenes/gameplay/player.tscn" id="1_i33lo"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dcaehmc3sk2xp" path="res://assets/sprites/GB.png" id="10_bxdoc"]
 [ext_resource type="Texture2D" uid="uid://nq5c4y2vqbft" path="res://assets/sprites/reimu_portrait.png" id="10_y7cpk"]
 [ext_resource type="AudioStream" uid="uid://dh32yadgyb2cu" path="res://assets/sounds/uk1.mp3" id="12_hh3ox"]
+[ext_resource type="PackedScene" uid="uid://dlyax1n6svosl" path="res://scenes/volume_control.tscn" id="13_aypqn"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ib3x4"]
 normal = Vector2(0, 1)
@@ -152,6 +153,7 @@ texture = SubResource("GradientTexture2D_ixgck")
 position = Vector2(0, -177)
 
 [node name="UI" type="Control" parent="."]
+z_index = 1
 custom_minimum_size = Vector2(1024, 576)
 layout_mode = 3
 anchors_preset = 15
@@ -456,6 +458,12 @@ text = "Menu"
 
 [node name="GameTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Volume" parent="." instance=ExtResource("13_aypqn")]
+offset_left = -470.0
+offset_top = -121.0
+offset_right = -260.0
+offset_bottom = 242.0
 
 [connection signal="area_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]
 [connection signal="body_entered" from="Boundaries/Projectiles" to="Boundaries/Projectiles" method="_on_body_entered"]

@@ -19,7 +19,6 @@ signal start_game
 
 func _ready():
 	root = $".."
-	print(root)
 	ui.ini(ukboss.health)
 	
 	start_game.connect(ukboss.toggle_attacking)

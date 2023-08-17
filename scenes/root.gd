@@ -2,7 +2,11 @@ extends Node2D
 
 @onready var gameplay_obj = preload("res://scenes/gameplay/gameplay.tscn")
 @onready var main_menu := $Menus/Main as Control
+@onready var fps_label := $Overlay/FPS as Label
 var gameplay
+
+func _process(_d) -> void:
+	fps_label.text = "FPS: " + str(Engine.get_frames_per_second())
 
 func start_game() -> void:
 	gameplay = gameplay_obj.instantiate()
