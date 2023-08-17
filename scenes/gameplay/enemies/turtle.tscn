@@ -37,6 +37,7 @@ debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 
 [node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_2pxyt")
+bus = &"Enemy"
 
 [connection signal="area_entered" from="Area2D" to="." method="on_collision"]
 [connection signal="body_entered" from="Area2D" to="." method="on_collision"]

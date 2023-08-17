@@ -65,12 +65,15 @@ scale = Vector2(0.1, 0.1)
 
 [node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_317cp")
+bus = &"Enemy"
 
 [node name="ShootPlayer" type="AudioStreamPlayer2D" parent="SFXPlayer"]
 stream = ExtResource("3_egcua")
+bus = &"Enemy"
 
 [node name="LaserPlayer" type="AudioStreamPlayer2D" parent="SFXPlayer"]
 stream = ExtResource("5_x0bln")
+bus = &"Enemy"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_o0wlq")

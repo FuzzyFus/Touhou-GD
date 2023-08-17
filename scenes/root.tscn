@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bh8k3yjllh2jg"]
+[gd_scene load_steps=10 format=3 uid="uid://bh8k3yjllh2jg"]
 
 [ext_resource type="Texture2D" uid="uid://b1c6g84tl78wt" path="res://assets/sprites/touhouawesome.jpg" id="1_43gvk"]
 [ext_resource type="Script" path="res://scenes/root.gd" id="1_kw56u"]
+[ext_resource type="PackedScene" uid="uid://dlyax1n6svosl" path="res://scenes/volume_control.tscn" id="2_xeudf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_q423j"]
 line_spacing = 0.0
@@ -92,6 +93,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+metadata/_edit_lock_ = true
 
 [node name="Main" type="Control" parent="Menus"]
 layout_mode = 1
@@ -100,6 +102,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Background" type="TextureRect" parent="Menus/Main"]
 self_modulate = Color(0.301961, 0.301961, 0.301961, 1)
@@ -110,6 +113,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_43gvk")
+metadata/_edit_lock_ = true
 
 [node name="Title" type="Label" parent="Menus/Main"]
 layout_mode = 2
@@ -397,5 +401,11 @@ text = "stort"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
+
+[node name="Volume" parent="." instance=ExtResource("2_xeudf")]
+offset_left = -503.0
+offset_top = 21.0
+offset_right = -353.0
+offset_bottom = 281.0
 
 [connection signal="pressed" from="Menus/Main/Button" to="." method="start_game"]

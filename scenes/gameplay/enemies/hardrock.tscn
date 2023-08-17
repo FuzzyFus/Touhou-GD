@@ -27,6 +27,7 @@ shape = SubResource("RectangleShape2D_u5n1y")
 
 [node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_u5b4r")
+bus = &"Enemy"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_u5n1y")

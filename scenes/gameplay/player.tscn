@@ -405,7 +405,7 @@ shooting_delay = 0.1
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qps5x")
 animation = &"idle"
-frame = 1
+frame = 2
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f3n5x")
@@ -417,12 +417,15 @@ texture = SubResource("AtlasTexture_5x8go")
 [node name="Timer" type="Timer" parent="."]
 
 [node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = &"Player"
 
 [node name="ShootPlayer" type="AudioStreamPlayer2D" parent="SFXPlayer"]
 stream = ExtResource("4_0xqlj")
+bus = &"Player"
 
 [node name="DeathPlayer" type="AudioStreamPlayer2D" parent="SFXPlayer"]
 stream = ExtResource("5_ant18")
+bus = &"Player"
 
 [node name="RightBall" type="Sprite2D" parent="."]
 position = Vector2(22, 0)
