@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bh8k3yjllh2jg"]
+[gd_scene load_steps=11 format=3 uid="uid://bh8k3yjllh2jg"]
 
 [ext_resource type="Texture2D" uid="uid://b1c6g84tl78wt" path="res://assets/sprites/touhouawesome.jpg" id="1_43gvk"]
 [ext_resource type="Script" path="res://scenes/root.gd" id="1_kw56u"]
@@ -42,6 +42,13 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6qc7"]
+bg_color = Color(0.258824, 0.258824, 0.258824, 0.639216)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
 
 [node name="root" type="Node2D"]
 script = ExtResource("1_kw56u")
@@ -361,6 +368,35 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_pmhc4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_dgi1j")
 text = "stort"
 
+[node name="VolumePlaceholder" type="Panel" parent="Menus/Main"]
+modulate = Color(1, 1, 1, 0.509804)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -270.0
+offset_right = 160.0
+offset_bottom = -10.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f6qc7")
+
+[node name="Label" type="Label" parent="Menus/Main/VolumePlaceholder"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "<<<<<
+Use your scroll wheel to change volume, and mouse over to change bus!
+<<<<<"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
 
@@ -380,6 +416,7 @@ offset_bottom = 288.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="Version" type="Label" parent="Overlay"]
 layout_mode = 1
@@ -405,9 +442,16 @@ text = "FPS: "
 
 [node name="Volume" parent="Overlay" instance=ExtResource("2_xeudf")]
 layout_mode = 1
-offset_left = -503.0
-offset_top = 21.0
-offset_right = -353.0
-offset_bottom = 281.0
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -270.0
+offset_right = 160.0
+offset_bottom = -10.0
+grow_horizontal = 1
+grow_vertical = 0
 
 [connection signal="pressed" from="Menus/Main/Button" to="." method="start_game"]
